@@ -1,14 +1,15 @@
 using Microsoft.CommandPalette.Extensions.Toolkit;
 using WebSearchShortcut.Browser;
+using WebSearchShortcut.Shortcut;
 
 namespace WebSearchShortcut.Commands;
 
 internal sealed partial class OpenHomePageCommand : InvokableCommand
 {
-    private readonly WebSearchShortcutDataEntry _shortcut;
+    private readonly ShortcutEntry _shortcut;
     private readonly BrowserExecutionInfo _browserInfo;
 
-    public OpenHomePageCommand(WebSearchShortcutDataEntry shortcut)
+    public OpenHomePageCommand(ShortcutEntry shortcut)
     {
         Name = $"[UNBOUND] {nameof(OpenHomePageCommand)}.{nameof(Name)} required - shortcut='{shortcut.Name}'";
 
@@ -18,7 +19,7 @@ internal sealed partial class OpenHomePageCommand : InvokableCommand
 
     public override CommandResult Invoke()
     {
-        if (!ShellHelpers.OpenCommandInShell(_browserInfo.Path, _browserInfo.ArgumentsPattern, WebSearchShortcutDataEntry.GetHomePageUrl(_shortcut)))
+        if (!ShellHelpers.OpenCommandInShell(_browserInfo.Path, _browserInfo.ArgumentsPattern, ShortcutEntry.GetHomePageUrl(_shortcut)))
         {
             // TODO GH# 138 --> actually display feedback from the extension somewhere.
             return CommandResult.KeepOpen();

@@ -4,15 +4,17 @@ using System.Text.Json.Nodes;
 using Microsoft.CommandPalette.Extensions.Toolkit;
 using Windows.Foundation;
 using WebSearchShortcut.Browser;
+using WebSearchShortcut.Helpers;
 using WebSearchShortcut.Properties;
+using WebSearchShortcut.Shortcut;
 
 namespace WebSearchShortcut;
 
 internal sealed partial class AddShortcutForm : FormContent
 {
-    private readonly WebSearchShortcutDataEntry? _shortcut;
+    private readonly ShortcutEntry? _shortcut;
 
-    public AddShortcutForm(WebSearchShortcutDataEntry? shortcut)
+    public AddShortcutForm(ShortcutEntry? shortcut)
     {
         _shortcut = shortcut;
         var name = shortcut?.Name ?? string.Empty;
@@ -136,14 +138,14 @@ internal sealed partial class AddShortcutForm : FormContent
 """;
     }
 
-    internal event TypedEventHandler<object, WebSearchShortcutDataEntry>? AddedCommand;
+    internal event TypedEventHandler<object, ShortcutEntry>? AddedCommand;
 
     public override CommandResult SubmitForm(string inputs)
     {
         var root = JsonNode.Parse(inputs);
         if (root is null) return CommandResult.GoHome();
 
-        var shortcut = _shortcut ?? new WebSearchShortcutDataEntry();
+        var shortcut = _shortcut ?? new ShortcutEntry();
         shortcut.Name = root["name"]?.GetValue<string>() ?? string.Empty;
         shortcut.Url = root["url"]?.GetValue<string>() ?? string.Empty;
         shortcut.SuggestionProvider = root["suggestionProvider"]?.GetValue<string>() ?? string.Empty;

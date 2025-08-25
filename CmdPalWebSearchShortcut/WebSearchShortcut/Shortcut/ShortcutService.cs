@@ -1,0 +1,159 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
+using Microsoft.CommandPalette.Extensions;
+using Microsoft.CommandPalette.Extensions.Toolkit;
+
+namespace WebSearchShortcut.Shortcut;
+
+internal static class ShortcutService
+{
+    public static string ShortcutFilePath => Path.Combine(Utilities.BaseSettingsPath("WebSearchShortcut"), "WebSearchShortcut.json");
+
+    private static readonly ShortcutStore _store = new();
+    private static readonly Lazy<List<ShortcutEntry>> _cache = new(Load);
+    private static readonly Lock _lock = new();
+
+    public static IReadOnlyList<ShortcutEntry> GetShortcutsSnapshot()
+    {
+        lock (_lock)
+        {
+            var shortcuts = _cache.Value;
+
+            var snapshot = new ShortcutEntry[shortcuts.Count];
+            for (int i = 0; i < shortcuts.Count; i++)
+                snapshot[i] = shortcuts[i] with { };
+
+            return snapshot;
+        }
+    }
+
+    public static ShortcutEntry Add(ShortcutEntry shortcut)
+    {
+        ShortcutEntry addedShortcut;
+
+        lock (_lock)
+        {
+            var shortcuts = _cache.Value;
+
+            if (shortcuts.Exists(s => string.Equals(s.Id, shortcut.Id, StringComparison.Ordinal)))
+                throw new ArgumentException($"Shortcut with Id '{shortcut.Id}' already exists.", nameof(shortcut));
+
+            shortcuts.Add(shortcut with { });
+
+            EnsureIds(shortcuts);
+
+            addedShortcut = shortcuts[^1] with { };
+
+            Save(shortcuts);
+        }
+
+        return addedShortcut;
+    }
+
+    public static void Remove(string Id)
+    {
+        lock (_lock)
+        {
+            var shortcuts = _cache.Value;
+            var idx = shortcuts.FindIndex(s => s.Id == Id);
+
+            if (idx < 0)
+                throw new KeyNotFoundException($"Shortcut with Id '{Id}' was not found.");
+
+            var removedShortcut = shortcuts[idx];
+            shortcuts.RemoveAt(idx);
+
+            Save(shortcuts);
+        }
+    }
+
+    public static void Update(ShortcutEntry shortcut)
+    {
+        lock (_lock)
+        {
+            var shortcuts = _cache.Value;
+            var idx = shortcuts.FindIndex(s => s.Id == shortcut.Id);
+
+            if (idx < 0)
+                throw new KeyNotFoundException($"Shortcut with Id '{shortcut.Id}' was not found.");
+
+            var before = shortcuts[idx];
+            shortcuts[idx] = shortcut with { };
+
+            Save(shortcuts);
+        }
+    }
+
+    private static List<ShortcutEntry> Load()
+    {
+        List<ShortcutEntry> shortcuts;
+
+        try
+        {
+            shortcuts = _store.LoadOrCreate(ShortcutFilePath) ?? [];
+        }
+        catch (Exception ex)
+        {
+            ExtensionHost.LogMessage(new LogMessage($"[WebSearchShortcut] Load failed - {ex.GetType().FullName}: {ex.Message}") { State = MessageState.Error });
+
+            var defaults = _store.CreateDefault();
+
+            EnsureIds(defaults);
+
+            return defaults;
+        }
+
+        if (EnsureIds(shortcuts))
+            Save(shortcuts);
+
+        ExtensionHost.LogMessage($"[WebSearchShortcut] Load succeeded");
+
+        return shortcuts;
+    }
+
+    private static void Save(List<ShortcutEntry> shortcuts)
+    {
+        try
+        {
+            _store.Save(ShortcutFilePath, shortcuts);
+        }
+        catch (Exception ex)
+        {
+            ExtensionHost.LogMessage(new LogMessage($"[WebSearchShortcut] Save failed - {ex.GetType().FullName}: {ex.Message}") { State = MessageState.Error });
+        }
+
+        ExtensionHost.LogMessage($"[WebSearchShortcut] Save succeeded");
+    }
+
+    private static bool EnsureIds(List<ShortcutEntry> shortcuts)
+    {
+        bool modified = false;
+
+        HashSet<string> seenIds = [];
+        for (int i = 0; i < shortcuts.Count; i++)
+        {
+            var shortcut = shortcuts[i];
+            string id = shortcut.Id;
+            if (string.IsNullOrWhiteSpace(id) || seenIds.Contains(id))
+            {
+                id = GenerateId();
+                shortcuts[i] = shortcut with { Id = id };
+                modified = true;
+            }
+            seenIds.Add(id);
+        }
+
+        return modified;
+    }
+
+    private static string GenerateId()
+    {
+        byte[] buffer = new byte[8];
+        Random.Shared.NextBytes(buffer);
+        ulong randomNumber = BitConverter.ToUInt64(buffer, 0);
+
+        return $"WebSearchShortcut{randomNumber}";
+    }
+}
