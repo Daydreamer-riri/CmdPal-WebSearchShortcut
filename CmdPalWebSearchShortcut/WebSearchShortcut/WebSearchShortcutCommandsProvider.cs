@@ -20,6 +20,7 @@ public partial class WebSearchShortcutCommandsProvider : CommandProvider
 {
     private readonly ICommandItem _addShortcutItem;
     private ICommandItem[] _topLevelCommands = [];
+    private IFallbackCommandItem[] _fallbackCommands = [];
     private Storage? _storage;
 
     public WebSearchShortcutCommandsProvider()
@@ -48,6 +49,8 @@ public partial class WebSearchShortcutCommandsProvider : CommandProvider
 
         return _topLevelCommands;
     }
+
+    public override IFallbackCommandItem[] FallbackCommands() => _fallbackCommands;
 
     internal static string GetShortcutsJsonPath()
     {
@@ -102,6 +105,7 @@ public partial class WebSearchShortcutCommandsProvider : CommandProvider
     private void ReloadCommands()
     {
         List<ICommandItem> items = [_addShortcutItem];
+        List<IFallbackCommandItem> fallbackItem = [];
 
         if (_storage is null)
         {
@@ -111,9 +115,11 @@ public partial class WebSearchShortcutCommandsProvider : CommandProvider
         if (_storage is not null)
         {
             items.AddRange(_storage.Data.Select(CreateCommandItem));
+            fallbackItem.AddRange(_storage.Data.Select(shortcut => new FallbackSearchWebItem(shortcut)));
         }
 
         _topLevelCommands = [.. items];
+        _fallbackCommands = [.. fallbackItem];
     }
 
     private void LoadShortcutFromFile()
