@@ -2,6 +2,7 @@ using Microsoft.CommandPalette.Extensions;
 using Microsoft.CommandPalette.Extensions.Toolkit;
 using Windows.Foundation;
 using WebSearchShortcut.Properties;
+using WebSearchShortcut.Shortcut;
 
 namespace WebSearchShortcut;
 
@@ -9,7 +10,7 @@ internal sealed partial class AddShortcutPage : ContentPage
 {
     private readonly AddShortcutForm _addShortcutForm;
 
-    public AddShortcutPage(WebSearchShortcutDataEntry? shortcut)
+    public AddShortcutPage(ShortcutEntry? shortcut)
     {
         bool isAdd = shortcut is null;
 
@@ -21,7 +22,7 @@ internal sealed partial class AddShortcutPage : ContentPage
         _addShortcutForm = new AddShortcutForm(shortcut);
     }
 
-    internal event TypedEventHandler<object, WebSearchShortcutDataEntry>? AddedCommand
+    internal event TypedEventHandler<object, ShortcutEntry>? AddedCommand
     {
         add => _addShortcutForm.AddedCommand += value;
         remove => _addShortcutForm.AddedCommand -= value;
