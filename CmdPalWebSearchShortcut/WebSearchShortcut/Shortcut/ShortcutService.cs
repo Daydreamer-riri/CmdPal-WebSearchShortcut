@@ -7,9 +7,16 @@ using Microsoft.CommandPalette.Extensions.Toolkit;
 
 namespace WebSearchShortcut.Shortcut;
 
+internal sealed class ShortcutsChangedEventArgs(ShortcutEntry? before, ShortcutEntry? after) : EventArgs
+{
+    public ShortcutEntry? Before { get; } = before;
+    public ShortcutEntry? After { get; } = after;
+}
+
 internal static class ShortcutService
 {
     public static string ShortcutFilePath => Path.Combine(Utilities.BaseSettingsPath("WebSearchShortcut"), "WebSearchShortcut.json");
+    public static event EventHandler<ShortcutsChangedEventArgs>? ChangedEvent;
 
     private static readonly ShortcutStore _store = new();
     private static readonly Lazy<List<ShortcutEntry>> _cache = new(Load);
@@ -29,9 +36,10 @@ internal static class ShortcutService
         }
     }
 
-    public static ShortcutEntry Add(ShortcutEntry shortcut)
+    public static void Add(ShortcutEntry shortcut)
     {
         ShortcutEntry addedShortcut;
+        ShortcutsChangedEventArgs args;
 
         lock (_lock)
         {
@@ -47,13 +55,20 @@ internal static class ShortcutService
             addedShortcut = shortcuts[^1] with { };
 
             Save(shortcuts);
+
+            args = new ShortcutsChangedEventArgs(before: null, after: addedShortcut);
         }
 
-        return addedShortcut;
+        ExtensionHost.LogMessage($"[WebSearchShortcut] Add Shortcut - id={addedShortcut.Id} name=\"{addedShortcut.Name}\" url={addedShortcut.Url}");
+
+        ChangedEvent?.Invoke(typeof(ShortcutService), args);
     }
 
     public static void Remove(string Id)
     {
+        ShortcutEntry removedShortcut;
+        ShortcutsChangedEventArgs args;
+
         lock (_lock)
         {
             var shortcuts = _cache.Value;
@@ -62,15 +77,24 @@ internal static class ShortcutService
             if (idx < 0)
                 throw new KeyNotFoundException($"Shortcut with Id '{Id}' was not found.");
 
-            var removedShortcut = shortcuts[idx];
+            removedShortcut = shortcuts[idx];
             shortcuts.RemoveAt(idx);
 
             Save(shortcuts);
+
+            args = new ShortcutsChangedEventArgs(before: removedShortcut, after: null);
         }
+
+        ExtensionHost.LogMessage($"[WebSearchShortcut] Remove Shortcut - id={removedShortcut.Id} name=\"{removedShortcut.Name}\" url={removedShortcut.Url}");
+
+        ChangedEvent?.Invoke(typeof(ShortcutService), args);
     }
 
     public static void Update(ShortcutEntry shortcut)
     {
+        ShortcutEntry updatedShortcut;
+        ShortcutsChangedEventArgs args;
+
         lock (_lock)
         {
             var shortcuts = _cache.Value;
@@ -81,9 +105,16 @@ internal static class ShortcutService
 
             var before = shortcuts[idx];
             shortcuts[idx] = shortcut with { };
+            updatedShortcut = shortcut with { };
 
             Save(shortcuts);
+
+            args = new ShortcutsChangedEventArgs(before: before, after: updatedShortcut);
         }
+
+        ExtensionHost.LogMessage($"[WebSearchShortcut] Update Shortcut - id={updatedShortcut.Id} name=\"{updatedShortcut.Name}\" url={updatedShortcut.Url}");
+
+        ChangedEvent?.Invoke(typeof(ShortcutService), args);
     }
 
     private static List<ShortcutEntry> Load()
