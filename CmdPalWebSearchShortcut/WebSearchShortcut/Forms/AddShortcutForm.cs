@@ -16,6 +16,7 @@ internal sealed partial class AddShortcutForm : FormContent
     public AddShortcutForm(ShortcutEntry? shortcut)
     {
         _shortcut = shortcut;
+
         var name = shortcut?.Name ?? string.Empty;
         var url = shortcut?.Url ?? string.Empty;
         var suggestionProvider = shortcut?.SuggestionProvider ?? string.Empty;
@@ -23,6 +24,8 @@ internal sealed partial class AddShortcutForm : FormContent
         var homePage = shortcut?.HomePage ?? string.Empty;
         var browserPath = shortcut?.BrowserPath ?? string.Empty;
         var browserArgs = shortcut?.BrowserArgs ?? string.Empty;
+
+        BrowsersDiscovery.Reload();
 
         TemplateJson = $$"""
 {

@@ -7,7 +7,7 @@ namespace WebSearchShortcut;
 
 internal sealed partial class AddShortcutPage : ContentPage
 {
-    private readonly AddShortcutForm _addShortcutForm;
+    private readonly ShortcutEntry? _shortcut;
 
     public AddShortcutPage(ShortcutEntry? shortcut)
     {
@@ -18,8 +18,8 @@ internal sealed partial class AddShortcutPage : ContentPage
         Name = $"[UNBOUND] {nameof(AddShortcutPage)}.{nameof(Name)} required - shortcut={(shortcut is null ? "null" : $"'{shortcut.Name}'")}";
         Icon = isAdd ? Icons.AddShortcut : Icons.EditShortcut;
 
-        _addShortcutForm = new AddShortcutForm(shortcut);
+        _shortcut = shortcut;
     }
 
-    public override IContent[] GetContent() => [_addShortcutForm];
+    public override IContent[] GetContent() => [new AddShortcutForm(_shortcut)];
 }

@@ -62,6 +62,9 @@ public partial class WebSearchShortcutCommandsProvider : CommandProvider
             "ShortcutsChanged: both Before and After are null (unexpected)."
         );
 
+        if ((before?.Name, before?.Domain, before?.IconUrl) == (after?.Name, after?.Domain, after?.IconUrl))
+            return;
+
         ReloadCommands();
 
         RaiseItemsChanged(0);
