@@ -156,6 +156,12 @@
   <data name="AddShortcutForm_ReplaceWhitespacePlaceholder" xml:space="preserve">
     <value>指定用于替换空格的字符</value>
   </data>
+  <data name="AddShortcutForm_RecordHistoryLabel" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AddShortcutForm_RecordHistoryTitle" xml:space="preserve">
+    <value />
+  </data>
   <data name="AddShortcutForm_HomepageLabel" xml:space="preserve">
     <value>自定义主页（可选）</value>
   </data>
@@ -180,6 +186,9 @@
   <data name="SearchShortcut_SubtitleTemplate" xml:space="preserve">
     <value>搜索 {engine}</value>
   </data>
+  <data name="SearchShortcut_ClearHistoryNameTemplate" xml:space="preserve">
+    <value />
+  </data>
   <data name="SearchShortcut_EditName" xml:space="preserve">
     <value>编辑搜索捷径</value>
   </data>
@@ -187,9 +196,6 @@
     <value>编辑搜索捷径</value>
   </data>
   <data name="SearchShortcut_DeleteName" xml:space="preserve">
-    <value>删除</value>
-  </data>
-  <data name="SearchShortcut_DeleteTitle" xml:space="preserve">
     <value>删除</value>
   </data>
   <data name="OpenHomePage_NameTemplate" xml:space="preserve">
@@ -203,5 +209,26 @@
   </data>
   <data name="SearchQuery_SubtitleTemplate" xml:space="preserve">
     <value>在 {engine} 中搜索“{query}”</value>
+  </data>
+  <data name="SearchQuery_DeleteHistoryNameTemplate" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_MaxDisplayCountLabel" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_MaxDisplayCountDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_MaxDisplayCountErrorMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_MaxHistoryDisplayCountLabel" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_MaxHistoryDisplayCountDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_MaxHistoryDisplayCountErrorMessage" xml:space="preserve">
+    <value />
   </data>
 </root>

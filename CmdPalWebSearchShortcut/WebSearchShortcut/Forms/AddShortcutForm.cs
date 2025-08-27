@@ -1,8 +1,9 @@
+using System;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using Microsoft.CommandPalette.Extensions.Toolkit;
 using Windows.Foundation;
+using Microsoft.CommandPalette.Extensions.Toolkit;
 using WebSearchShortcut.Browsers;
 using WebSearchShortcut.Properties;
 
@@ -19,6 +20,7 @@ internal sealed partial class AddShortcutForm : FormContent
         var url = shortcut?.Url ?? string.Empty;
         var suggestionProvider = shortcut?.SuggestionProvider ?? string.Empty;
         var replaceWhitespace = shortcut?.ReplaceWhitespace ?? string.Empty;
+        var recordHistory = shortcut?.RecordHistory ?? true;
         var homePage = shortcut?.HomePage ?? string.Empty;
         var browserPath = shortcut?.BrowserPath ?? string.Empty;
         var browserArgs = shortcut?.BrowserArgs ?? string.Empty;
@@ -68,18 +70,25 @@ internal sealed partial class AddShortcutForm : FormContent
             "errorMessage": "// Just for space between items"
         },
         {
+            "id": "replaceWhitespace",
             "type": "Input.Text",
             "style": "text",
-            "id": "replaceWhitespace",
             "label": {{JsonSerializer.Serialize(Resources.AddShortcutForm_ReplaceWhitespaceLabel, AppJsonSerializerContext.Default.String)}},
             "placeholder": {{JsonSerializer.Serialize(Resources.AddShortcutForm_ReplaceWhitespacePlaceholder, AppJsonSerializerContext.Default.String)}},
             "value": {{JsonSerializer.Serialize(replaceWhitespace, AppJsonSerializerContext.Default.String)}},
             "errorMessage": "// Just for space between items"
         },
         {
+            "id": "recordHistory",
+            "type": "Input.Toggle",
+            "label": {{JsonSerializer.Serialize(Resources.AddShortcutForm_RecordHistoryLabel, AppJsonSerializerContext.Default.String)}},
+            "title": {{JsonSerializer.Serialize(Resources.AddShortcutForm_RecordHistoryTitle, AppJsonSerializerContext.Default.String)}},
+            "value": {{JsonSerializer.Serialize(recordHistory ? "true" : "false", AppJsonSerializerContext.Default.String)}}
+        },
+        {
+            "id": "homePage",
             "type": "Input.Text",
             "style": "text",
-            "id": "homePage",
             "label": {{JsonSerializer.Serialize(Resources.AddShortcutForm_HomepageLabel, AppJsonSerializerContext.Default.String)}},
             "placeholder": {{JsonSerializer.Serialize(Resources.AddShortcutForm_HomepagePlaceholder, AppJsonSerializerContext.Default.String)}},
             "value": {{JsonSerializer.Serialize(homePage, AppJsonSerializerContext.Default.String)}},
@@ -127,6 +136,7 @@ internal sealed partial class AddShortcutForm : FormContent
                 "url": "url",
                 "suggestionProvider": "suggestionProvider",
                 "replaceWhitespace": "replaceWhitespace",
+                "recordHistory": "recordHistory",
                 "homePage": "homePage",
                 "browserPath": "browserPath",
                 "browserArgs": "browserArgs"
@@ -149,11 +159,13 @@ internal sealed partial class AddShortcutForm : FormContent
         shortcut.Url = root["url"]?.GetValue<string>() ?? string.Empty;
         shortcut.SuggestionProvider = root["suggestionProvider"]?.GetValue<string>() ?? string.Empty;
         shortcut.ReplaceWhitespace = root["replaceWhitespace"]?.GetValue<string>() ?? string.Empty;
+        shortcut.RecordHistory = string.Equals(root["recordHistory"]?.GetValue<string>() ?? "true", "true", StringComparison.OrdinalIgnoreCase);
         shortcut.HomePage = root["homePage"]?.GetValue<string>() ?? string.Empty;
         shortcut.BrowserPath = root["browserPath"]?.GetValue<string>() ?? string.Empty;
         shortcut.BrowserArgs = root["browserArgs"]?.GetValue<string>() ?? string.Empty;
 
         AddedCommand?.Invoke(this, shortcut);
+
         return CommandResult.GoHome();
     }
 }

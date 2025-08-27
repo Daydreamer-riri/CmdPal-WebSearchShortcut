@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,6 +8,7 @@ using Microsoft.CommandPalette.Extensions;
 using Microsoft.CommandPalette.Extensions.Toolkit;
 using WebSearchShortcut.Commands;
 using WebSearchShortcut.Helpers;
+using WebSearchShortcut.History;
 using WebSearchShortcut.Properties;
 using WebSearchShortcut.Services;
 
@@ -14,16 +17,21 @@ namespace WebSearchShortcut;
 internal sealed partial class SearchWebPage : DynamicListPage
 {
     private readonly WebSearchShortcutDataEntry _shortcut;
-    private readonly IListItem _openHomePageItem;
+
+    private readonly ListItem _openHomePageItem;
+
+    private ListItem[] _suggestionItems = [];
     private IListItem[] _items = [];
-    private IListItem[] _suggestionItems = [];
+
+    private readonly SettingsManager _settingsManager;
+
     private int _lastUpdateSearchTextEpoch;
     private readonly Lock _swapSuggestionsCancellationSourceLock = new();
     private readonly Lock _renderLock = new();
     private readonly Lock _updateSuggestionLock = new();
     private CancellationTokenSource? _previousSuggestionsCancellationSource;
 
-    public SearchWebPage(WebSearchShortcutDataEntry shortcut)
+    public SearchWebPage(WebSearchShortcutDataEntry shortcut, SettingsManager settingsManager)
     {
         _shortcut = shortcut;
 
@@ -34,10 +42,23 @@ internal sealed partial class SearchWebPage : DynamicListPage
             Title = StringFormatter.Format(Resources.OpenHomePage_TitleTemplate, new() { ["engine"] = Name })
         };
 
-        _items = [_openHomePageItem];
+        _settingsManager = settingsManager;
+
+        _settingsManager.SettingsChanged += (s, a) => Rebuild();
     }
 
-    public override IListItem[] GetItems() => Volatile.Read(ref _items);
+    public override IListItem[] GetItems()
+    {
+        if (_items.Length == 0)
+            Rebuild();
+
+        return Volatile.Read(ref _items);
+    }
+
+    public void Rebuild()
+    {
+        UpdateSearchText(SearchText, SearchText);
+    }
 
     public override async void UpdateSearchText(string oldSearch, string newSearch)
     {
@@ -68,11 +89,13 @@ internal sealed partial class SearchWebPage : DynamicListPage
         {
         }
 
+        var historyItems = BuildHistoryItems(newSearch);
+
         if (shouldOpenHomePage)
         {
             UpdateSuggestionItems([], currentEpoch);
 
-            RenderItems([_openHomePageItem], currentEpoch);
+            RenderItems([_openHomePageItem, .. historyItems], currentEpoch);
 
             return;
         }
@@ -80,12 +103,12 @@ internal sealed partial class SearchWebPage : DynamicListPage
         var primaryItems = BuildPrimaryItems(newSearch);
         var snapshotSuggestions = Volatile.Read(ref _suggestionItems);
 
-        RenderItems([.. primaryItems, .. snapshotSuggestions], currentEpoch);
+        RenderItems(ItemIntegrate(primaryItems, historyItems, snapshotSuggestions), currentEpoch);
 
         if (!shouldFetchSuggestions)
             return;
 
-        IListItem[] suggestionItems;
+        ListItem[] suggestionItems;
         try
         {
             suggestionItems = await FetchSuggestionItemsAsync(newSearch, currentCancellationSource!.Token).ConfigureAwait(false);
@@ -111,7 +134,69 @@ internal sealed partial class SearchWebPage : DynamicListPage
 
         UpdateSuggestionItems(suggestionItems, currentEpoch);
 
-        RenderItems([.. primaryItems, .. suggestionItems], currentEpoch);
+        RenderItems(ItemIntegrate(primaryItems, historyItems, suggestionItems), currentEpoch);
+    }
+
+    private ListItem[] ItemIntegrate(ListItem[] primaryItems, ListItem[] historyItems, ListItem[] suggestionItems)
+    {
+        var primaryItemByTitle = primaryItems.ToDictionary(item => item.Title, item => item);
+        var historyItemByTitle = historyItems.ToDictionary(item => item.Title, item => item);
+        var suggestionItemByTitle = suggestionItems.ToDictionary(item => item.Title, item => item);
+
+        HashSet<string> removeFromHistory = [];
+        HashSet<string> removeFromSuggestions = [];
+
+        foreach (var (title, primaryItem) in primaryItemByTitle)
+        {
+            if (historyItemByTitle.TryGetValue(title, out var historyItem))
+            {
+                primaryItem.Icon = Icons.History;
+                primaryItem.MoreCommands = historyItem.MoreCommands;
+
+                if (suggestionItemByTitle.TryGetValue(title, out var suggestionItem))
+                {
+                    historyItem.Subtitle = suggestionItem.Subtitle;
+                    removeFromSuggestions.Add(title);
+                }
+                else
+                {
+                    removeFromHistory.Add(title);
+                }
+            }
+        }
+
+        foreach (var (title, historyItem) in historyItemByTitle)
+        {
+            if (removeFromHistory.Contains(title))
+                continue;
+
+            if (removeFromSuggestions.Contains(title))
+                continue;
+
+            if (suggestionItemByTitle.TryGetValue(title, out var suggestionItem))
+            {
+                historyItem.Subtitle = suggestionItem.Subtitle;
+                removeFromSuggestions.Add(title);
+            }
+        }
+
+        List<ListItem> items = new(primaryItems.Length + historyItems.Length + suggestionItems.Length);
+
+        items.AddRange(primaryItems);
+
+        foreach (var historyItem in historyItems)
+        {
+            if (!removeFromHistory.Contains(historyItem.Title))
+                items.Add(historyItem);
+        }
+
+        foreach (var suggestoinItem in suggestionItems)
+        {
+            if (!removeFromSuggestions.Contains(suggestoinItem.Title))
+                items.Add(suggestoinItem);
+        }
+
+        return [.. items.Take(_settingsManager.MaxDisplayCount)];
     }
 
     private void RenderItems(IListItem[] items, int currentUpdateSearchTextEpoch)
@@ -130,7 +215,7 @@ internal sealed partial class SearchWebPage : DynamicListPage
         RaiseItemsChanged(items.Length);
     }
 
-    private void UpdateSuggestionItems(IListItem[] suggestionItems, int currentUpdateSearchTextEpoch)
+    private void UpdateSuggestionItems(ListItem[] suggestionItems, int currentUpdateSearchTextEpoch)
     {
         if (currentUpdateSearchTextEpoch != Volatile.Read(ref _lastUpdateSearchTextEpoch))
             return;
@@ -154,6 +239,39 @@ internal sealed partial class SearchWebPage : DynamicListPage
                 Subtitle = StringFormatter.Format(Resources.SearchQuery_SubtitleTemplate, new() { ["engine"] = Name, ["query"] = searchText }),
                 MoreCommands = [new CommandContextItem(new OpenHomePageCommand(_shortcut))]
             }
+        ];
+    }
+
+    private ListItem[] BuildHistoryItems(string searchText)
+    {
+        var historyQueries = HistoryService
+            .Search(_shortcut.Name, searchText)
+            .Take(string.IsNullOrEmpty(searchText) ? _settingsManager.MaxDisplayCount : _settingsManager.MaxHistoryDisplayCount);
+
+        return [
+            .. historyQueries.Select(historyQuery => new ListItem(new SearchWebCommand(_shortcut, historyQuery))
+            {
+                Title = historyQuery,
+                Subtitle = StringFormatter.Format(Resources.SearchQuery_SubtitleTemplate, new() { ["engine"] = Name, ["query"] = historyQuery }),
+                Icon = Icons.History,
+                TextToSuggest = historyQuery,
+                MoreCommands = [
+                    new CommandContextItem(new OpenHomePageCommand(_shortcut)),
+                    new CommandContextItem(
+                        title: StringFormatter.Format(Resources.SearchQuery_DeleteHistoryNameTemplate, new() { ["engine"] = Name, ["query"] = historyQuery }),
+                        action: () =>
+                        {
+                            HistoryService.Remove(_shortcut.Name, historyQuery);
+                            Rebuild();
+                        },
+                        result: CommandResult.KeepOpen()
+                    )
+                    {
+                        Icon = Icons.DeleteHistory,
+                        IsCritical = true
+                    }
+                ]
+            })
         ];
     }
 

@@ -13,7 +13,7 @@ internal sealed partial class OpenHomePageCommand : InvokableCommand
     internal OpenHomePageCommand(WebSearchShortcutDataEntry shortcut)
     {
         Name = StringFormatter.Format(Resources.OpenHomePage_NameTemplate, new() { ["engine"] = shortcut.Name });
-        Icon = Icons.Search;
+        Icon = Icons.Home;
         _shortcut = shortcut;
         _browserInfo = new BrowserExecutionInfo(shortcut);
     }

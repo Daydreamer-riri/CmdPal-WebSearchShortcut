@@ -12,6 +12,7 @@ internal sealed class WebSearchShortcutDataEntry
     // public string[]? Urls { get; set; }
     public string? SuggestionProvider { get; set; }
     public string? ReplaceWhitespace { get; set; }
+    public bool? RecordHistory { get; set; }
     public string? IconUrl { get; set; }
     public string? HomePage { get; set; }
     public string? BrowserPath { get; set; }

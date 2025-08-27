@@ -156,6 +156,12 @@
   <data name="AddShortcutForm_ReplaceWhitespacePlaceholder" xml:space="preserve">
     <value>Specify which character(s) to replace a space</value>
   </data>
+  <data name="AddShortcutForm_RecordHistoryLabel" xml:space="preserve">
+    <value>Search History</value>
+  </data>
+  <data name="AddShortcutForm_RecordHistoryTitle" xml:space="preserve">
+    <value>Record history for this shortcut</value>
+  </data>
   <data name="AddShortcutForm_HomepageLabel" xml:space="preserve">
     <value>Custom Home Page (Optional)</value>
   </data>
@@ -180,6 +186,9 @@
   <data name="SearchShortcut_SubtitleTemplate" xml:space="preserve">
     <value>Search {engine}</value>
   </data>
+  <data name="SearchShortcut_ClearHistoryNameTemplate" xml:space="preserve">
+    <value>Clear {engine}'s History</value>
+  </data>
   <data name="SearchShortcut_EditName" xml:space="preserve">
     <value>Edit Search Shortcut</value>
   </data>
@@ -187,9 +196,6 @@
     <value>Edit Search Shortcut</value>
   </data>
   <data name="SearchShortcut_DeleteName" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="SearchShortcut_DeleteTitle" xml:space="preserve">
     <value>Delete</value>
   </data>
   <data name="OpenHomePage_NameTemplate" xml:space="preserve">
@@ -203,5 +209,26 @@
   </data>
   <data name="SearchQuery_SubtitleTemplate" xml:space="preserve">
     <value>Search {engine} for "{query}"</value>
+  </data>
+  <data name="SearchQuery_DeleteHistoryNameTemplate" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Settings_MaxDisplayCountLabel" xml:space="preserve">
+    <value>Max Search Results</value>
+  </data>
+  <data name="Settings_MaxDisplayCountDescription" xml:space="preserve">
+    <value>Maximum total items shown per search</value>
+  </data>
+  <data name="Settings_MaxDisplayCountErrorMessage" xml:space="preserve">
+    <value>Must be an integer greater than or equal to 1</value>
+  </data>
+  <data name="Settings_MaxHistoryDisplayCountLabel" xml:space="preserve">
+    <value>Max History Results</value>
+  </data>
+  <data name="Settings_MaxHistoryDisplayCountDescription" xml:space="preserve">
+    <value>Maximum number of history results shown during search; set to 0 to hide history. Any value exceeding “Max Search Results” is ignored.</value>
+  </data>
+  <data name="Settings_MaxHistoryDisplayCountErrorMessage" xml:space="preserve">
+    <value>Must be an integer greater than or equal to 0</value>
   </data>
 </root>

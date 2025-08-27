@@ -156,6 +156,12 @@
   <data name="AddShortcutForm_ReplaceWhitespacePlaceholder" xml:space="preserve">
     <value>搜尋關鍵字中的空白會被替換為這裡指定的字元</value>
   </data>
+  <data name="AddShortcutForm_RecordHistoryLabel" xml:space="preserve">
+    <value>搜尋歷史</value>
+  </data>
+  <data name="AddShortcutForm_RecordHistoryTitle" xml:space="preserve">
+    <value>記錄此捷徑的搜尋歷史</value>
+  </data>
   <data name="AddShortcutForm_HomepageLabel" xml:space="preserve">
     <value>自訂首頁（可選）</value>
   </data>
@@ -180,6 +186,9 @@
   <data name="SearchShortcut_SubtitleTemplate" xml:space="preserve">
     <value>在 {engine} 上搜尋</value>
   </data>
+  <data name="SearchShortcut_ClearHistoryNameTemplate" xml:space="preserve">
+    <value>清除「{engine}」的搜尋歷史</value>
+  </data>
   <data name="SearchShortcut_EditName" xml:space="preserve">
     <value>編輯搜尋捷徑</value>
   </data>
@@ -187,9 +196,6 @@
     <value>編輯搜尋捷徑</value>
   </data>
   <data name="SearchShortcut_DeleteName" xml:space="preserve">
-    <value>刪除搜尋捷徑</value>
-  </data>
-  <data name="SearchShortcut_DeleteTitle" xml:space="preserve">
     <value>刪除搜尋捷徑</value>
   </data>
   <data name="OpenHomePage_NameTemplate" xml:space="preserve">
@@ -203,5 +209,26 @@
   </data>
   <data name="SearchQuery_SubtitleTemplate" xml:space="preserve">
     <value>在 {engine} 上搜尋「{query}」</value>
+  </data>
+  <data name="SearchQuery_DeleteHistoryNameTemplate" xml:space="preserve">
+    <value>將「{query}」從歷史紀錄刪除</value>
+  </data>
+  <data name="Settings_MaxDisplayCountLabel" xml:space="preserve">
+    <value>搜尋結果顯示上限</value>
+  </data>
+  <data name="Settings_MaxDisplayCountDescription" xml:space="preserve">
+    <value>一次搜尋最多顯示的總項目數</value>
+  </data>
+  <data name="Settings_MaxDisplayCountErrorMessage" xml:space="preserve">
+    <value>必須是大於或等於 1 的整數</value>
+  </data>
+  <data name="Settings_MaxHistoryDisplayCountLabel" xml:space="preserve">
+    <value>搜尋歷史顯示上限</value>
+  </data>
+  <data name="Settings_MaxHistoryDisplayCountDescription" xml:space="preserve">
+    <value>搜尋時顯示的歷史結果上限；設為 0 不顯示歷史。超過「搜尋結果顯示上限」的部分會被忽略</value>
+  </data>
+  <data name="Settings_MaxHistoryDisplayCountErrorMessage" xml:space="preserve">
+    <value>必須是大於或等於 0 的整數</value>
   </data>
 </root>
