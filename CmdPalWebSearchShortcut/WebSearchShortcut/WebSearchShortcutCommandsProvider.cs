@@ -128,8 +128,20 @@ public partial class WebSearchShortcutCommandsProvider : CommandProvider
         var deleteCommand = new CommandContextItem(
             title: StringFormatter.Format(Resources.DeleteShortcutItem_TitleTemplate, new() { ["shortcut"] = shortcut.Name }),
             name: $"[UNREACHABLE] DeleteCommand.Name - shortcut='{shortcut.Name}'",
-            action: () => ShortcutService.Remove(shortcut.Id),
-            result: CommandResult.KeepOpen()
+            action: null,
+            result: CommandResult.Confirm(
+                new ConfirmationArgs()
+                {
+                    Title = StringFormatter.Format(Resources.DeleteShortcutConfirm_TitleTemplate, new() { ["shortcut"] = shortcut.Name }),
+                    Description = StringFormatter.Format(Resources.DeleteShortcutConfirm_DescriptionTemplate, new() { ["shortcut"] = shortcut.Name }),
+                    PrimaryCommand = new AnonymousCommand(() => ShortcutService.Remove(shortcut.Id))
+                    {
+                        Name = StringFormatter.Format(Resources.DeleteShortcutConfirm_ButtonTemplate, new() { ["shortcut"] = shortcut.Name }),
+                        Result = CommandResult.GoHome()
+                    },
+                    IsPrimaryCommandCritical = true
+                }
+            )
         )
         {
             Icon = Icons.Delete,

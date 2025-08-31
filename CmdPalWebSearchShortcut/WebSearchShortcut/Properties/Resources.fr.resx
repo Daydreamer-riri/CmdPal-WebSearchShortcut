@@ -201,6 +201,15 @@
   <data name="DeleteShortcutItem_TitleTemplate" xml:space="preserve">
     <value>Supprimer</value>
   </data>
+  <data name="DeleteShortcutConfirm_TitleTemplate" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DeleteShortcutConfirm_DescriptionTemplate" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DeleteShortcutConfirm_ButtonTemplate" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
   <data name="SearchWebPage_TitleTemplate" xml:space="preserve">
     <value>{shortcut}</value>
   </data>

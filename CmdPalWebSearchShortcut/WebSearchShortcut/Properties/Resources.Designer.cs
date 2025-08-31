@@ -252,6 +252,33 @@ namespace WebSearchShortcut.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
+        internal static string DeleteShortcutConfirm_ButtonTemplate {
+            get {
+                return ResourceManager.GetString("DeleteShortcutConfirm_ButtonTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete {shortcut}?.
+        /// </summary>
+        internal static string DeleteShortcutConfirm_DescriptionTemplate {
+            get {
+                return ResourceManager.GetString("DeleteShortcutConfirm_DescriptionTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete {shortcut}.
+        /// </summary>
+        internal static string DeleteShortcutConfirm_TitleTemplate {
+            get {
+                return ResourceManager.GetString("DeleteShortcutConfirm_TitleTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
         internal static string DeleteShortcutItem_TitleTemplate {
             get {
                 return ResourceManager.GetString("DeleteShortcutItem_TitleTemplate", resourceCulture);

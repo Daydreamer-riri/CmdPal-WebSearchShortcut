@@ -201,6 +201,15 @@
   <data name="DeleteShortcutItem_TitleTemplate" xml:space="preserve">
     <value>刪除搜尋捷徑</value>
   </data>
+  <data name="DeleteShortcutConfirm_TitleTemplate" xml:space="preserve">
+    <value>刪除搜尋捷徑</value>
+  </data>
+  <data name="DeleteShortcutConfirm_DescriptionTemplate" xml:space="preserve">
+    <value>你確定要永久刪除 {shortcut} 嗎？</value>
+  </data>
+  <data name="DeleteShortcutConfirm_ButtonTemplate" xml:space="preserve">
+    <value>刪除</value>
+  </data>
   <data name="SearchWebPage_TitleTemplate" xml:space="preserve">
     <value>{shortcut}</value>
   </data>
