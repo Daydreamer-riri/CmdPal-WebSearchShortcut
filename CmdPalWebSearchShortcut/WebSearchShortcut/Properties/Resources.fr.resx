@@ -120,88 +120,133 @@
   <data name="WebSearchShortcut_DisplayName" xml:space="preserve">
     <value>WebSearchShortcut</value>
   </data>
-  <data name="AddShortcut_AddName" xml:space="preserve">
+  <data name="AddShortcutItem_Title" xml:space="preserve">
     <value>Ajouter un raccourci de recherche</value>
   </data>
-  <data name="AddShortcut_AddTitle" xml:space="preserve">
+  <data name="AddShortcutItem_Name" xml:space="preserve">
     <value>Ajouter un raccourci de recherche</value>
   </data>
-  <data name="AddShortcutForm_NameLabel" xml:space="preserve">
+  <data name="AddShortcutPage_Title_Add" xml:space="preserve">
+    <value>Ajouter un raccourci de recherche</value>
+  </data>
+  <data name="AddShortcutPage_Title_Edit" xml:space="preserve">
+    <value>Modifier le raccourci de recherche</value>
+  </data>
+  <data name="AddShortcutForm_Name_Label" xml:space="preserve">
     <value>Nom</value>
   </data>
-  <data name="AddShortcutForm_NameErrorMessage" xml:space="preserve">
+  <data name="AddShortcutForm_Name_ErrorMessage" xml:space="preserve">
     <value>Le nom est obligatoire</value>
   </data>
-  <data name="AddShortcutForm_UrlLabel" xml:space="preserve">
+  <data name="AddShortcutForm_Url_Label" xml:space="preserve">
     <value>URL</value>
   </data>
-  <data name="AddShortcutForm_UrlPlaceholder" xml:space="preserve">
+  <data name="AddShortcutForm_Url_Placeholder" xml:space="preserve">
     <value>Utilisez %s dans l'URL pour le terme de recherche</value>
   </data>
-  <data name="AddShortcutForm_UrlErrorMessage" xml:space="preserve">
+  <data name="AddShortcutForm_Url_ErrorMessage" xml:space="preserve">
     <value>L'URL est obligatoire</value>
   </data>
-  <data name="AddShortcutForm_SuggestionProviderLabel" xml:space="preserve">
+  <data name="AddShortcutForm_SuggestionProvider_Label" xml:space="preserve">
     <value>Fournisseur de suggestions</value>
   </data>
-  <data name="AddShortcutForm_SuggestionProviderPlaceholder" xml:space="preserve">
+  <data name="AddShortcutForm_SuggestionProvider_Placeholder" xml:space="preserve">
     <value>Fournisseur de suggestions invalide</value>
   </data>
-  <data name="AddShortcutForm_SuggestionProviderNone" xml:space="preserve">
+  <data name="AddShortcutForm_SuggestionProvider_None" xml:space="preserve">
     <value>Aucun</value>
   </data>
-  <data name="AddShortcutForm_ReplaceWhitespaceLabel" xml:space="preserve">
-    <value>Remplacer les espaces (Optionnel)</value>
+  <data name="AddShortcutForm_RecordHistory_Label" xml:space="preserve">
+    <value />
   </data>
-  <data name="AddShortcutForm_ReplaceWhitespacePlaceholder" xml:space="preserve">
-    <value>Spécifiez quel(s) caractère(s) remplace(nt) un espace</value>
+  <data name="AddShortcutForm_RecordHistory_Title" xml:space="preserve">
+    <value />
   </data>
-  <data name="AddShortcutForm_HomepageLabel" xml:space="preserve">
+  <data name="AddShortcutForm_Homepage_Label" xml:space="preserve">
     <value>Page d'accueil personnalisée (Optionnel)</value>
   </data>
-  <data name="AddShortcutForm_HomepagePlaceholder" xml:space="preserve">
+  <data name="AddShortcutForm_Homepage_Placeholder" xml:space="preserve">
     <value>Utiliser le domaine par défaut</value>
   </data>
-  <data name="AddShortcutForm_BrowserArgsLabel" xml:space="preserve">
-    <value>Arguments du navigateur (Optionnel)</value>
+  <data name="AddShortcutForm_ReplaceWhitespace_Label" xml:space="preserve">
+    <value>Remplacer les espaces (Optionnel)</value>
   </data>
-  <data name="AddShortcutForm_BrowserArgsPlaceholder" xml:space="preserve">
-    <value>Arguments de lancement du navigateur, utilisez %1 pour l'URL</value>
+  <data name="AddShortcutForm_ReplaceWhitespace_Placeholder" xml:space="preserve">
+    <value>Spécifiez quel(s) caractère(s) remplace(nt) un espace</value>
   </data>
-  <data name="AddShortcutForm_BrowserPathLabel" xml:space="preserve">
+  <data name="AddShortcutForm_BrowserPath_Label" xml:space="preserve">
     <value>Navigateur</value>
   </data>
-  <data name="AddShortcutForm_BrowserPathDefault" xml:space="preserve">
+  <data name="AddShortcutForm_BrowserPath_Default" xml:space="preserve">
     <value>Par défaut</value>
+  </data>
+  <data name="AddShortcutForm_BrowserArgs_Label" xml:space="preserve">
+    <value>Arguments du navigateur (Optionnel)</value>
+  </data>
+  <data name="AddShortcutForm_BrowserArgs_Placeholder" xml:space="preserve">
+    <value>Arguments de lancement du navigateur, utilisez %1 pour l'URL</value>
   </data>
   <data name="AddShortcutForm_Save" xml:space="preserve">
     <value>Enregistrer</value>
   </data>
-  <data name="SearchShortcut_SubtitleTemplate" xml:space="preserve">
-    <value>Rechercher sur {engine}</value>
+  <data name="ShortcutItem_TitleTemplate" xml:space="preserve">
+    <value>{shortcut}</value>
   </data>
-  <data name="SearchShortcut_EditName" xml:space="preserve">
+  <data name="ShortcutItem_SubtitleTemplate" xml:space="preserve">
+    <value>Rechercher sur {shortcut}</value>
+  </data>
+  <data name="ShortcutItem_NameTemplate" xml:space="preserve">
+    <value>{shortcut}</value>
+  </data>
+  <data name="ClearHistory_TitleTemplate" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EditShortcutItem_TitleTemplate" xml:space="preserve">
     <value>Modifier le raccourci de recherche</value>
   </data>
-  <data name="SearchShortcut_EditTitle" xml:space="preserve">
+  <data name="EditShortcutItem_NameTemplate" xml:space="preserve">
     <value>Modifier le raccourci de recherche</value>
   </data>
-  <data name="SearchShortcut_DeleteName" xml:space="preserve">
+  <data name="DeleteShortcutItem_TitleTemplate" xml:space="preserve">
     <value>Supprimer</value>
   </data>
-  <data name="SearchShortcut_DeleteTitle" xml:space="preserve">
-    <value>Supprimer</value>
+  <data name="SearchWebPage_TitleTemplate" xml:space="preserve">
+    <value>{shortcut}</value>
   </data>
-  <data name="OpenHomePage_NameTemplate" xml:space="preserve">
-    <value>Ouvrir {engine}</value>
+  <data name="OpenHomepageItem_TitleTemplate" xml:space="preserve">
+    <value>Ouvrir {shortcut}</value>
   </data>
-  <data name="OpenHomePage_TitleTemplate" xml:space="preserve">
-    <value>Ouvrir {engine}</value>
+  <data name="OpenHomepageItem_NameTemplate" xml:space="preserve">
+    <value>Ouvrir {shortcut}</value>
   </data>
-  <data name="SearchQuery_NameTemplate" xml:space="preserve">
+  <data name="SearchQueryItem_TitleTemplate" xml:space="preserve">
+    <value>{query}</value>
+  </data>
+  <data name="SearchQueryItem_SubtitleTemplate" xml:space="preserve">
+    <value>Rechercher "{query}" sur {shortcut}</value>
+  </data>
+  <data name="SearchQueryItem_NameTemplate" xml:space="preserve">
     <value>Rechercher "{query}"</value>
   </data>
-  <data name="SearchQuery_SubtitleTemplate" xml:space="preserve">
-    <value>Rechercher "{query}" sur {engine}</value>
+  <data name="DeleteHistory_TitleTemplate" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_MaxDisplayCount_Label" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_MaxDisplayCount_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_MaxDisplayCount_ErrorMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_MaxHistoryDisplayCount_Label" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_MaxHistoryDisplayCount_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_MaxHistoryDisplayCount_ErrorMessage" xml:space="preserve">
+    <value />
   </data>
 </root>

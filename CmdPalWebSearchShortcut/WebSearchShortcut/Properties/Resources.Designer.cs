@@ -61,110 +61,110 @@ namespace WebSearchShortcut.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add Search Shortcut.
-        /// </summary>
-        internal static string AddShortcut_AddName {
-            get {
-                return ResourceManager.GetString("AddShortcut_AddName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add Search Shortcut.
-        /// </summary>
-        internal static string AddShortcut_AddTitle {
-            get {
-                return ResourceManager.GetString("AddShortcut_AddTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Browser Arguments (Optional).
         /// </summary>
-        internal static string AddShortcutForm_BrowserArgsLabel {
+        internal static string AddShortcutForm_BrowserArgs_Label {
             get {
-                return ResourceManager.GetString("AddShortcutForm_BrowserArgsLabel", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_BrowserArgs_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Browser launch arguments, use %1 for URL.
         /// </summary>
-        internal static string AddShortcutForm_BrowserArgsPlaceholder {
+        internal static string AddShortcutForm_BrowserArgs_Placeholder {
             get {
-                return ResourceManager.GetString("AddShortcutForm_BrowserArgsPlaceholder", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_BrowserArgs_Placeholder", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Default.
         /// </summary>
-        internal static string AddShortcutForm_BrowserPathDefault {
+        internal static string AddShortcutForm_BrowserPath_Default {
             get {
-                return ResourceManager.GetString("AddShortcutForm_BrowserPathDefault", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_BrowserPath_Default", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Browser.
         /// </summary>
-        internal static string AddShortcutForm_BrowserPathLabel {
+        internal static string AddShortcutForm_BrowserPath_Label {
             get {
-                return ResourceManager.GetString("AddShortcutForm_BrowserPathLabel", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_BrowserPath_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Custom Home Page (Optional).
         /// </summary>
-        internal static string AddShortcutForm_HomepageLabel {
+        internal static string AddShortcutForm_Homepage_Label {
             get {
-                return ResourceManager.GetString("AddShortcutForm_HomepageLabel", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_Homepage_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Use domain by default.
         /// </summary>
-        internal static string AddShortcutForm_HomepagePlaceholder {
+        internal static string AddShortcutForm_Homepage_Placeholder {
             get {
-                return ResourceManager.GetString("AddShortcutForm_HomepagePlaceholder", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_Homepage_Placeholder", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Name is required.
         /// </summary>
-        internal static string AddShortcutForm_NameErrorMessage {
+        internal static string AddShortcutForm_Name_ErrorMessage {
             get {
-                return ResourceManager.GetString("AddShortcutForm_NameErrorMessage", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_Name_ErrorMessage", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
-        internal static string AddShortcutForm_NameLabel {
+        internal static string AddShortcutForm_Name_Label {
             get {
-                return ResourceManager.GetString("AddShortcutForm_NameLabel", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_Name_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search History.
+        /// </summary>
+        internal static string AddShortcutForm_RecordHistory_Label {
+            get {
+                return ResourceManager.GetString("AddShortcutForm_RecordHistory_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Record history for this shortcut.
+        /// </summary>
+        internal static string AddShortcutForm_RecordHistory_Title {
+            get {
+                return ResourceManager.GetString("AddShortcutForm_RecordHistory_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Replace Whitespace (Optional).
         /// </summary>
-        internal static string AddShortcutForm_ReplaceWhitespaceLabel {
+        internal static string AddShortcutForm_ReplaceWhitespace_Label {
             get {
-                return ResourceManager.GetString("AddShortcutForm_ReplaceWhitespaceLabel", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_ReplaceWhitespace_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Specify which character(s) to replace a space.
         /// </summary>
-        internal static string AddShortcutForm_ReplaceWhitespacePlaceholder {
+        internal static string AddShortcutForm_ReplaceWhitespace_Placeholder {
             get {
-                return ResourceManager.GetString("AddShortcutForm_ReplaceWhitespacePlaceholder", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_ReplaceWhitespace_Placeholder", resourceCulture);
             }
         }
         
@@ -180,135 +180,270 @@ namespace WebSearchShortcut.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Suggestion Provider.
         /// </summary>
-        internal static string AddShortcutForm_SuggestionProviderLabel {
+        internal static string AddShortcutForm_SuggestionProvider_Label {
             get {
-                return ResourceManager.GetString("AddShortcutForm_SuggestionProviderLabel", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_SuggestionProvider_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
-        internal static string AddShortcutForm_SuggestionProviderNone {
+        internal static string AddShortcutForm_SuggestionProvider_None {
             get {
-                return ResourceManager.GetString("AddShortcutForm_SuggestionProviderNone", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_SuggestionProvider_None", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Invalid Suggestion Provider.
         /// </summary>
-        internal static string AddShortcutForm_SuggestionProviderPlaceholder {
+        internal static string AddShortcutForm_SuggestionProvider_Placeholder {
             get {
-                return ResourceManager.GetString("AddShortcutForm_SuggestionProviderPlaceholder", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_SuggestionProvider_Placeholder", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to URL is required.
         /// </summary>
-        internal static string AddShortcutForm_UrlErrorMessage {
+        internal static string AddShortcutForm_Url_ErrorMessage {
             get {
-                return ResourceManager.GetString("AddShortcutForm_UrlErrorMessage", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_Url_ErrorMessage", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to URL.
         /// </summary>
-        internal static string AddShortcutForm_UrlLabel {
+        internal static string AddShortcutForm_Url_Label {
             get {
-                return ResourceManager.GetString("AddShortcutForm_UrlLabel", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_Url_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Use %s in the URL for the search term.
         /// </summary>
-        internal static string AddShortcutForm_UrlPlaceholder {
+        internal static string AddShortcutForm_Url_Placeholder {
             get {
-                return ResourceManager.GetString("AddShortcutForm_UrlPlaceholder", resourceCulture);
+                return ResourceManager.GetString("AddShortcutForm_Url_Placeholder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open {engine}.
+        ///   Looks up a localized string similar to Add Search Shortcut.
         /// </summary>
-        internal static string OpenHomePage_NameTemplate {
+        internal static string AddShortcutItem_Name {
             get {
-                return ResourceManager.GetString("OpenHomePage_NameTemplate", resourceCulture);
+                return ResourceManager.GetString("AddShortcutItem_Name", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open {engine}.
+        ///   Looks up a localized string similar to Add Search Shortcut.
         /// </summary>
-        internal static string OpenHomePage_TitleTemplate {
+        internal static string AddShortcutItem_Title {
             get {
-                return ResourceManager.GetString("OpenHomePage_TitleTemplate", resourceCulture);
+                return ResourceManager.GetString("AddShortcutItem_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Search Shortcut.
+        /// </summary>
+        internal static string AddShortcutPage_Title_Add {
+            get {
+                return ResourceManager.GetString("AddShortcutPage_Title_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Search Shortcut.
+        /// </summary>
+        internal static string AddShortcutPage_Title_Edit {
+            get {
+                return ResourceManager.GetString("AddShortcutPage_Title_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear {shortcut}&apos;s History.
+        /// </summary>
+        internal static string ClearHistory_TitleTemplate {
+            get {
+                return ResourceManager.GetString("ClearHistory_TitleTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string DeleteHistory_TitleTemplate {
+            get {
+                return ResourceManager.GetString("DeleteHistory_TitleTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string DeleteShortcutItem_TitleTemplate {
+            get {
+                return ResourceManager.GetString("DeleteShortcutItem_TitleTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Search Shortcut.
+        /// </summary>
+        internal static string EditShortcutItem_NameTemplate {
+            get {
+                return ResourceManager.GetString("EditShortcutItem_NameTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Search Shortcut.
+        /// </summary>
+        internal static string EditShortcutItem_TitleTemplate {
+            get {
+                return ResourceManager.GetString("EditShortcutItem_TitleTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open {shortcut}.
+        /// </summary>
+        internal static string OpenHomepageItem_NameTemplate {
+            get {
+                return ResourceManager.GetString("OpenHomepageItem_NameTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open {shortcut}.
+        /// </summary>
+        internal static string OpenHomepageItem_TitleTemplate {
+            get {
+                return ResourceManager.GetString("OpenHomepageItem_TitleTemplate", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Search for &quot;{query}&quot;.
         /// </summary>
-        internal static string SearchQuery_NameTemplate {
+        internal static string SearchQueryItem_NameTemplate {
             get {
-                return ResourceManager.GetString("SearchQuery_NameTemplate", resourceCulture);
+                return ResourceManager.GetString("SearchQueryItem_NameTemplate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search {engine} for &quot;{query}&quot;.
+        ///   Looks up a localized string similar to Search {shortcut} for &quot;{query}&quot;.
         /// </summary>
-        internal static string SearchQuery_SubtitleTemplate {
+        internal static string SearchQueryItem_SubtitleTemplate {
             get {
-                return ResourceManager.GetString("SearchQuery_SubtitleTemplate", resourceCulture);
+                return ResourceManager.GetString("SearchQueryItem_SubtitleTemplate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete.
+        ///   Looks up a localized string similar to {query}.
         /// </summary>
-        internal static string SearchShortcut_DeleteName {
+        internal static string SearchQueryItem_TitleTemplate {
             get {
-                return ResourceManager.GetString("SearchShortcut_DeleteName", resourceCulture);
+                return ResourceManager.GetString("SearchQueryItem_TitleTemplate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete.
+        ///   Looks up a localized string similar to {shortcut}.
         /// </summary>
-        internal static string SearchShortcut_DeleteTitle {
+        internal static string SearchWebPage_TitleTemplate {
             get {
-                return ResourceManager.GetString("SearchShortcut_DeleteTitle", resourceCulture);
+                return ResourceManager.GetString("SearchWebPage_TitleTemplate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit Search Shortcut.
+        ///   Looks up a localized string similar to Maximum total items shown per search.
         /// </summary>
-        internal static string SearchShortcut_EditName {
+        internal static string Settings_MaxDisplayCount_Description {
             get {
-                return ResourceManager.GetString("SearchShortcut_EditName", resourceCulture);
+                return ResourceManager.GetString("Settings_MaxDisplayCount_Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit Search Shortcut.
+        ///   Looks up a localized string similar to Must be an integer greater than or equal to 1.
         /// </summary>
-        internal static string SearchShortcut_EditTitle {
+        internal static string Settings_MaxDisplayCount_ErrorMessage {
             get {
-                return ResourceManager.GetString("SearchShortcut_EditTitle", resourceCulture);
+                return ResourceManager.GetString("Settings_MaxDisplayCount_ErrorMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search {engine}.
+        ///   Looks up a localized string similar to Max Search Results.
         /// </summary>
-        internal static string SearchShortcut_SubtitleTemplate {
+        internal static string Settings_MaxDisplayCount_Label {
             get {
-                return ResourceManager.GetString("SearchShortcut_SubtitleTemplate", resourceCulture);
+                return ResourceManager.GetString("Settings_MaxDisplayCount_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum number of history results shown during search; set to 0 to hide history. Any value exceeding “Max Search Results” is ignored..
+        /// </summary>
+        internal static string Settings_MaxHistoryDisplayCount_Description {
+            get {
+                return ResourceManager.GetString("Settings_MaxHistoryDisplayCount_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must be an integer greater than or equal to 0.
+        /// </summary>
+        internal static string Settings_MaxHistoryDisplayCount_ErrorMessage {
+            get {
+                return ResourceManager.GetString("Settings_MaxHistoryDisplayCount_ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max History Results.
+        /// </summary>
+        internal static string Settings_MaxHistoryDisplayCount_Label {
+            get {
+                return ResourceManager.GetString("Settings_MaxHistoryDisplayCount_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {shortcut}.
+        /// </summary>
+        internal static string ShortcutItem_NameTemplate {
+            get {
+                return ResourceManager.GetString("ShortcutItem_NameTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search {shortcut}.
+        /// </summary>
+        internal static string ShortcutItem_SubtitleTemplate {
+            get {
+                return ResourceManager.GetString("ShortcutItem_SubtitleTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {shortcut}.
+        /// </summary>
+        internal static string ShortcutItem_TitleTemplate {
+            get {
+                return ResourceManager.GetString("ShortcutItem_TitleTemplate", resourceCulture);
             }
         }
         
