@@ -133,6 +133,15 @@ namespace WebSearchShortcut.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Read-only mode: your changes will not be saved (likely due to a read/write failure on {filePath}). After a reload or restart, the change will be reverted..
+        /// </summary>
+        internal static string AddShortcutForm_ReadOnlyModeWarning {
+            get {
+                return ResourceManager.GetString("AddShortcutForm_ReadOnlyModeWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Replace Whitespace (Optional).
         /// </summary>
         internal static string AddShortcutForm_ReplaceWhitespace_Label {
@@ -264,6 +273,15 @@ namespace WebSearchShortcut.Properties {
         internal static string DeleteShortcutConfirm_DescriptionTemplate {
             get {
                 return ResourceManager.GetString("DeleteShortcutConfirm_DescriptionTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read-only mode: This change will not be saved (likely due to a read/write failure on {filePath}). After a reload or restart, the change will be reverted..
+        /// </summary>
+        internal static string DeleteShortcutConfirm_DescriptionTemplate_ReadOnlyMode {
+            get {
+                return ResourceManager.GetString("DeleteShortcutConfirm_DescriptionTemplate_ReadOnlyMode", resourceCulture);
             }
         }
         

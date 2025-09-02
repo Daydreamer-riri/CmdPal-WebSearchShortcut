@@ -133,7 +133,9 @@ public partial class WebSearchShortcutCommandsProvider : CommandProvider
                 new ConfirmationArgs()
                 {
                     Title = StringFormatter.Format(Resources.DeleteShortcutConfirm_TitleTemplate, new() { ["shortcut"] = shortcut.Name }),
-                    Description = StringFormatter.Format(Resources.DeleteShortcutConfirm_DescriptionTemplate, new() { ["shortcut"] = shortcut.Name }),
+                    Description = !ShortcutService.ReadOnlyMode
+                        ? StringFormatter.Format(Resources.DeleteShortcutConfirm_DescriptionTemplate, new() { ["shortcut"] = shortcut.Name })
+                        : StringFormatter.Format(Resources.DeleteShortcutConfirm_DescriptionTemplate_ReadOnlyMode, new() { ["shortcut"] = shortcut.Name, ["filePath"] = ShortcutService.ShortcutFilePath }),
                     PrimaryCommand = new AnonymousCommand(() => ShortcutService.Remove(shortcut.Id))
                     {
                         Name = StringFormatter.Format(Resources.DeleteShortcutConfirm_ButtonTemplate, new() { ["shortcut"] = shortcut.Name }),

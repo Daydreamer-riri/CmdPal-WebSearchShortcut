@@ -27,12 +27,25 @@ internal sealed partial class AddShortcutForm : FormContent
 
         BrowsersDiscovery.Reload();
 
+        string readOnlyBanner = ShortcutService.ReadOnlyMode
+            ? $$"""
+                    {
+                        "type": "TextBlock",
+                        "text": {{JsonSerializer.Serialize(StringFormatter.Format(Resources.AddShortcutForm_ReadOnlyModeWarning, new() { ["filePath"] = ShortcutService.ShortcutFilePath}), AppJsonSerializerContext.Default.String)}},
+                        "wrap": true,
+                        "weight": "Bolder",
+                        "color": "Attention"
+                    },
+            """
+            : string.Empty;
+
         TemplateJson = $$"""
 {
     "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
     "type": "AdaptiveCard",
     "version": "1.6",
     "body": [
+{{readOnlyBanner}}
         {
             "id": "name",
             "type": "Input.Text",

@@ -16,10 +16,12 @@ internal sealed class ShortcutsChangedEventArgs(ShortcutEntry? before, ShortcutE
 internal static class ShortcutService
 {
     public static string ShortcutFilePath => Path.Combine(Utilities.BaseSettingsPath("WebSearchShortcut"), "WebSearchShortcut.json");
+    public static bool ReadOnlyMode => _readOnlyMode;
     public static event EventHandler<ShortcutsChangedEventArgs>? ChangedEvent;
 
     private static readonly ShortcutStore _store = new();
     private static readonly Lazy<List<ShortcutEntry>> _cache = new(Load);
+    private static volatile bool _readOnlyMode;
     private static readonly Lock _lock = new();
 
     public static IReadOnlyList<ShortcutEntry> GetShortcutsSnapshot()
@@ -127,6 +129,8 @@ internal static class ShortcutService
         }
         catch (Exception ex)
         {
+            _readOnlyMode = true;
+
             ExtensionHost.LogMessage(new LogMessage($"[WebSearchShortcut] Load failed - {ex.GetType().FullName}: {ex.Message}") { State = MessageState.Error });
 
             var defaults = _store.CreateDefault();
@@ -146,12 +150,17 @@ internal static class ShortcutService
 
     private static void Save(List<ShortcutEntry> shortcuts)
     {
+        if (_readOnlyMode)
+            return;
+
         try
         {
             _store.Save(ShortcutFilePath, shortcuts);
         }
         catch (Exception ex)
         {
+            _readOnlyMode = true;
+
             ExtensionHost.LogMessage(new LogMessage($"[WebSearchShortcut] Save failed - {ex.GetType().FullName}: {ex.Message}") { State = MessageState.Error });
         }
 
