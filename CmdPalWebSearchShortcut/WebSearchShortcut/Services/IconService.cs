@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.CommandPalette.Extensions.Toolkit;
 using WebSearchShortcut.Properties;
+using WebSearchShortcut.Shortcut;
 
 namespace WebSearchShortcut.Services;
 
@@ -34,7 +35,7 @@ internal static class IconService
     /// </summary>
     /// <param name="shortcut">The web search shortcut data entry</param>
     /// <returns>IconInfo instance</returns>
-    public static IconInfo GetIconInfo(WebSearchShortcutDataEntry shortcut)
+    public static IconInfo GetIconInfo(ShortcutEntry shortcut)
     {
         return !string.IsNullOrWhiteSpace(shortcut.IconUrl)
             ? new IconInfo(shortcut.IconUrl)
@@ -134,7 +135,7 @@ internal static class IconService
     /// </summary>
     /// <param name="shortcut">The shortcut to update</param>
     /// <returns>The updated icon URL</returns>
-    public static async Task<string> UpdateIconUrlAsync(WebSearchShortcutDataEntry shortcut)
+    public static async Task<string> UpdateIconUrlAsync(ShortcutEntry shortcut)
     {
         if (shortcut == null || !string.IsNullOrWhiteSpace(shortcut.IconUrl))
         {

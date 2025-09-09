@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using WebSearchShortcut.Shortcut;
 
 namespace WebSearchShortcut.Browser;
 
@@ -8,7 +9,7 @@ internal sealed class BrowserExecutionInfo
     public string? Path { get; }
     public string? ArgumentsPattern { get; }
 
-    public BrowserExecutionInfo(WebSearchShortcutDataEntry shortcut)
+    public BrowserExecutionInfo(ShortcutEntry shortcut)
     {
         DefaultBrowserProvider.UpdateIfTimePassed();
 

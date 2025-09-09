@@ -2,11 +2,11 @@ using System;
 using System.Net;
 using System.Text.Json.Serialization;
 
-namespace WebSearchShortcut;
+namespace WebSearchShortcut.Shortcut;
 
-internal sealed class WebSearchShortcutDataEntry
+internal sealed record class ShortcutEntry
 {
-    public string Id { get; set; } = string.Empty;
+    public string Id { get; init; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public string? Keyword { get; set; }
     public string Url { get; set; } = string.Empty;
@@ -27,7 +27,7 @@ internal sealed class WebSearchShortcutDataEntry
         }
     }
 
-    static string UrlEncode(WebSearchShortcutDataEntry shortcut, string query)
+    public static string UrlEncode(ShortcutEntry shortcut, string query)
     {
         if (string.IsNullOrWhiteSpace(shortcut.ReplaceWhitespace) || shortcut.ReplaceWhitespace == " ")
         {
@@ -40,14 +40,14 @@ internal sealed class WebSearchShortcutDataEntry
         return WebUtility.UrlEncode(query.Replace(" ", shortcut.ReplaceWhitespace));
     }
 
-    static public string GetSearchUrl(WebSearchShortcutDataEntry shortcut, string query)
+    public static string GetSearchUrl(ShortcutEntry shortcut, string query)
     {
         string arguments = shortcut.Url.Replace("%s", UrlEncode(shortcut, query));
 
         return arguments;
     }
 
-    static public string GetHomePageUrl(WebSearchShortcutDataEntry shortcut)
+    public static string GetHomePageUrl(ShortcutEntry shortcut)
     {
         return !string.IsNullOrWhiteSpace(shortcut.HomePage)
                 ? shortcut.HomePage
