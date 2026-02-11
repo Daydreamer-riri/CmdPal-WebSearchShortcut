@@ -42,15 +42,6 @@ internal sealed class Storage
 
                 bool modified = EnsureIds(data.Data);
 
-                foreach (var defaultEntry in GetDefaultEntries())
-                {
-                    if (!data.Data.Exists(x => x.Name == defaultEntry.Name))
-                    {
-                        data.Data.Add(defaultEntry);
-                        modified = true;
-                    }
-                }
-
                 if (modified)
                 {
                     WriteToFile(path, data);
