@@ -1,5 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using Microsoft.Extensions.Logging;
@@ -11,6 +13,15 @@ namespace WebSearchShortcut.Helpers;
 internal partial class CmdPalLogger(string extensionName) : ILogger
 {
     private static readonly AsyncLocal<List<string>> _scopeStack = new();
+
+    private string GetLogPath()
+    {
+        string directory = Path.Combine(Utilities.BaseSettingsPath(extensionName), "Logs");
+
+        Directory.CreateDirectory(directory);
+
+        return Path.Combine(directory, $"{extensionName}_{DateTime.Now:yyyy-MM-dd}.log");
+    }
 
     public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
     {
@@ -28,7 +39,16 @@ internal partial class CmdPalLogger(string extensionName) : ILogger
             State = MapToMessageState(logLevel)
         };
 
+        string logLevelString = $"[{logLevel}]";
+        logLevelString = $"{logLevelString,-13}";
+        string dataTimeString = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fffffff}";
+
         ExtensionHost.LogMessage(logMessage);
+        Debug.WriteLine($"{dataTimeString} {logLevelString} {scopePrefix} {message}");
+        lock (extensionName)
+        {
+            File.AppendAllText(GetLogPath(), $"{dataTimeString} {logLevelString} {scopePrefix} {message}\n");
+        }
     }
 
     public bool IsEnabled(LogLevel logLevel) => logLevel != LogLevel.None;

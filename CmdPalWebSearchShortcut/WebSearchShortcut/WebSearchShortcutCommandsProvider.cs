@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.CommandPalette.Extensions;
 using Microsoft.CommandPalette.Extensions.Toolkit;
+using WebSearchShortcut.Browser;
 using WebSearchShortcut.Commands;
 using WebSearchShortcut.Helpers;
 using WebSearchShortcut.Properties;
@@ -27,6 +28,11 @@ public partial class WebSearchShortcutCommandsProvider : CommandProvider
     {
         DisplayName = Resources.WebSearchShortcut_DisplayName;
         Icon = Icons.Logo;
+
+        var logger = new CmdPalLogger("WebSearchShortcut");
+
+        DefaultBrowserProvider.Logger = logger;
+        BrowsersDiscovery.Logger = logger;
 
         var addShortcutPage = new AddShortcutPage(null)
         {
