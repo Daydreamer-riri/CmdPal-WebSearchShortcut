@@ -12,6 +12,8 @@ namespace WebSearchShortcut.Helpers;
 
 internal partial class CmdPalLogger(string extensionName) : ILogger
 {
+    public LogLevel LogLevel_ { get; set; } = LogLevel.Information;
+
     private static readonly AsyncLocal<List<string>> _scopeStack = new();
 
     private string GetLogPath()
@@ -51,7 +53,10 @@ internal partial class CmdPalLogger(string extensionName) : ILogger
         }
     }
 
-    public bool IsEnabled(LogLevel logLevel) => logLevel != LogLevel.None;
+    public bool IsEnabled(LogLevel logLevel)
+    {
+        return logLevel >= LogLevel_ && logLevel != LogLevel.None;
+    }
 
     public IDisposable? BeginScope<TState>(TState state) where TState : notnull
     {
