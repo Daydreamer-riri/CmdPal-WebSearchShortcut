@@ -3,15 +3,16 @@ using WebSearchShortcut.Commands;
 using WebSearchShortcut.Helpers;
 using WebSearchShortcut.Properties;
 using WebSearchShortcut.Services;
+using WebSearchShortcut.Shortcut;
 
 namespace WebSearchShortcut;
 
 internal sealed partial class FallbackSearchWebItem : FallbackCommandItem
 {
     private readonly SearchWebCommand _searchWebCommand;
-    private readonly WebSearchShortcutDataEntry _shortcut;
+    private readonly ShortcutEntry _shortcut;
 
-    public FallbackSearchWebItem(WebSearchShortcutDataEntry shortcut)
+    public FallbackSearchWebItem(ShortcutEntry shortcut)
         : base(new SearchWebCommand(shortcut, string.Empty) { Id = $"{shortcut.Id}.fallback" }, shortcut.Name)
     {
         _shortcut = shortcut;

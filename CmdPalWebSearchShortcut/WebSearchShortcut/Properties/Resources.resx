@@ -132,6 +132,9 @@
   <data name="AddShortcutPage_Title_Edit" xml:space="preserve">
     <value>Edit Search Shortcut</value>
   </data>
+  <data name="AddShortcutForm_ReadOnlyModeWarning" xml:space="preserve">
+    <value>Read-only mode: your changes will not be saved (likely due to a read/write failure on {filePath}). After a reload or restart, the change will be reverted.</value>
+  </data>
   <data name="AddShortcutForm_Name_Label" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -199,6 +202,18 @@
     <value>Edit Search Shortcut</value>
   </data>
   <data name="DeleteShortcutItem_TitleTemplate" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteShortcutConfirm_TitleTemplate" xml:space="preserve">
+    <value>Delete {shortcut}</value>
+  </data>
+  <data name="DeleteShortcutConfirm_DescriptionTemplate" xml:space="preserve">
+    <value>Are you sure you want to delete {shortcut}?</value>
+  </data>
+  <data name="DeleteShortcutConfirm_DescriptionTemplate_ReadOnlyMode" xml:space="preserve">
+    <value>Read-only mode: This change will not be saved (likely due to a read/write failure on {filePath}). After a reload or restart, the change will be reverted.</value>
+  </data>
+  <data name="DeleteShortcutConfirm_ButtonTemplate" xml:space="preserve">
     <value>Delete</value>
   </data>
   <data name="SearchWebPage_TitleTemplate" xml:space="preserve">

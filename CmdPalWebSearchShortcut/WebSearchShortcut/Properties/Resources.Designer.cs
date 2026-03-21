@@ -133,6 +133,15 @@ namespace WebSearchShortcut.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Read-only mode: your changes will not be saved (likely due to a read/write failure on {filePath}). After a reload or restart, the change will be reverted..
+        /// </summary>
+        internal static string AddShortcutForm_ReadOnlyModeWarning {
+            get {
+                return ResourceManager.GetString("AddShortcutForm_ReadOnlyModeWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Replace Whitespace (Optional).
         /// </summary>
         internal static string AddShortcutForm_ReplaceWhitespace_Label {
@@ -246,6 +255,42 @@ namespace WebSearchShortcut.Properties {
         internal static string AddShortcutPage_Title_Edit {
             get {
                 return ResourceManager.GetString("AddShortcutPage_Title_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string DeleteShortcutConfirm_ButtonTemplate {
+            get {
+                return ResourceManager.GetString("DeleteShortcutConfirm_ButtonTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete {shortcut}?.
+        /// </summary>
+        internal static string DeleteShortcutConfirm_DescriptionTemplate {
+            get {
+                return ResourceManager.GetString("DeleteShortcutConfirm_DescriptionTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read-only mode: This change will not be saved (likely due to a read/write failure on {filePath}). After a reload or restart, the change will be reverted..
+        /// </summary>
+        internal static string DeleteShortcutConfirm_DescriptionTemplate_ReadOnlyMode {
+            get {
+                return ResourceManager.GetString("DeleteShortcutConfirm_DescriptionTemplate_ReadOnlyMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete {shortcut}.
+        /// </summary>
+        internal static string DeleteShortcutConfirm_TitleTemplate {
+            get {
+                return ResourceManager.GetString("DeleteShortcutConfirm_TitleTemplate", resourceCulture);
             }
         }
         

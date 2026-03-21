@@ -2,19 +2,21 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Microsoft.CommandPalette.Extensions.Toolkit;
-using Windows.Foundation;
 using WebSearchShortcut.Browser;
+using WebSearchShortcut.Helpers;
 using WebSearchShortcut.Properties;
+using WebSearchShortcut.Shortcut;
 
 namespace WebSearchShortcut;
 
 internal sealed partial class AddShortcutForm : FormContent
 {
-    private readonly WebSearchShortcutDataEntry? _shortcut;
+    private readonly ShortcutEntry? _shortcut;
 
-    public AddShortcutForm(WebSearchShortcutDataEntry? shortcut)
+    public AddShortcutForm(ShortcutEntry? shortcut)
     {
         _shortcut = shortcut;
+
         var name = shortcut?.Name ?? string.Empty;
         var url = shortcut?.Url ?? string.Empty;
         var suggestionProvider = shortcut?.SuggestionProvider ?? string.Empty;
@@ -23,12 +25,27 @@ internal sealed partial class AddShortcutForm : FormContent
         var browserPath = shortcut?.BrowserPath ?? string.Empty;
         var browserArgs = shortcut?.BrowserArgs ?? string.Empty;
 
+        BrowsersDiscovery.Reload();
+
+        string readOnlyBanner = ShortcutService.ReadOnlyMode
+            ? $$"""
+                    {
+                        "type": "TextBlock",
+                        "text": {{JsonSerializer.Serialize(StringFormatter.Format(Resources.AddShortcutForm_ReadOnlyModeWarning, new() { ["filePath"] = ShortcutService.ShortcutFilePath}), AppJsonSerializerContext.Default.String)}},
+                        "wrap": true,
+                        "weight": "Bolder",
+                        "color": "Attention"
+                    },
+            """
+            : string.Empty;
+
         TemplateJson = $$"""
 {
     "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
     "type": "AdaptiveCard",
     "version": "1.6",
     "body": [
+{{readOnlyBanner}}
         {
             "id": "name",
             "type": "Input.Text",
@@ -136,14 +153,13 @@ internal sealed partial class AddShortcutForm : FormContent
 """;
     }
 
-    internal event TypedEventHandler<object, WebSearchShortcutDataEntry>? AddedCommand;
-
     public override CommandResult SubmitForm(string inputs)
     {
         var root = JsonNode.Parse(inputs);
         if (root is null) return CommandResult.GoHome();
 
-        var shortcut = _shortcut ?? new WebSearchShortcutDataEntry();
+        bool isAdd = _shortcut is null;
+        var shortcut = _shortcut ?? new ShortcutEntry();
         shortcut.Name = root["name"]?.GetValue<string>() ?? string.Empty;
         shortcut.Url = root["url"]?.GetValue<string>() ?? string.Empty;
         shortcut.SuggestionProvider = root["suggestionProvider"]?.GetValue<string>() ?? string.Empty;
@@ -152,7 +168,11 @@ internal sealed partial class AddShortcutForm : FormContent
         shortcut.BrowserPath = root["browserPath"]?.GetValue<string>() ?? string.Empty;
         shortcut.BrowserArgs = root["browserArgs"]?.GetValue<string>() ?? string.Empty;
 
-        AddedCommand?.Invoke(this, shortcut);
+        if (isAdd)
+            ShortcutService.Add(shortcut);
+        else
+            ShortcutService.Update(shortcut);
+
         return CommandResult.GoHome();
     }
 }
