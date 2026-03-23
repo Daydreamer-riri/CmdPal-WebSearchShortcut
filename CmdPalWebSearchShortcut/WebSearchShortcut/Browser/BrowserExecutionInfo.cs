@@ -5,16 +5,17 @@ namespace WebSearchShortcut.Browser;
 
 internal sealed class BrowserExecutionInfo
 {
-    public string? Path { get; }
-    public string? ArgumentsPattern { get; }
+    public string Path { get; }
+    public string ArgumentsPattern { get; }
 
     public BrowserExecutionInfo(WebSearchShortcutDataEntry shortcut)
     {
         DefaultBrowserProvider.UpdateIfTimePassed();
+        BrowserInfo defaultBrowser = DefaultBrowserProvider.GetDefaultBrowser();
 
         Path = !string.IsNullOrWhiteSpace(shortcut.BrowserPath)
-               ? shortcut.BrowserPath
-               : DefaultBrowserProvider.Path;
+            ? shortcut.BrowserPath.Trim()
+            : defaultBrowser.Path.Trim();
 
         string? trimmedArgs;
 
@@ -24,20 +25,26 @@ internal sealed class BrowserExecutionInfo
         }
         else if (string.IsNullOrWhiteSpace(shortcut.BrowserPath))
         {
-            trimmedArgs = DefaultBrowserProvider.ArgumentsPattern;
+            trimmedArgs = defaultBrowser.ArgumentsPattern.Trim();
         }
         else
         {
             trimmedArgs = BrowsersDiscovery
-                              .GetAllInstalledBrowsers()
-                              .FirstOrDefault(b => string.Equals(b.Path, shortcut.BrowserPath, StringComparison.OrdinalIgnoreCase))
-                              ?.ArgumentsPattern.Trim();
+                .GetInstalledBrowsers()
+                .FirstOrDefault(browser => string.Equals(browser.Path.Trim(), shortcut.BrowserPath.Trim(), StringComparison.OrdinalIgnoreCase))?
+                .ArgumentsPattern.Trim();
         }
 
-        trimmedArgs ??= string.Empty;
+        if (string.IsNullOrWhiteSpace(trimmedArgs))
+        {
+            trimmedArgs = string.Empty;
+        }
 
-        ArgumentsPattern = trimmedArgs.Contains("%1", StringComparison.Ordinal)
-                         ? trimmedArgs
-                        : trimmedArgs + " %1";
+        if (!trimmedArgs.Contains("%1"))
+        {
+            trimmedArgs += " %1";
+        }
+
+        ArgumentsPattern = trimmedArgs.Trim();
     }
 }

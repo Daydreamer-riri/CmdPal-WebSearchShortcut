@@ -9,10 +9,12 @@ using System.IO;
 using System.Linq;
 using Microsoft.CommandPalette.Extensions;
 using Microsoft.CommandPalette.Extensions.Toolkit;
+using WebSearchShortcut.Browser;
 using WebSearchShortcut.Commands;
 using WebSearchShortcut.Helpers;
 using WebSearchShortcut.Properties;
 using WebSearchShortcut.Services;
+using WebSearchShortcut.Setting;
 
 namespace WebSearchShortcut;
 
@@ -27,6 +29,20 @@ public partial class WebSearchShortcutCommandsProvider : CommandProvider
     {
         DisplayName = Resources.WebSearchShortcut_DisplayName;
         Icon = Icons.Logo;
+        Settings = SettingsManager.Instance.Settings;
+
+        var logger = new CmdPalLogger("WebSearchShortcut")
+        {
+            LogLevel_ = SettingsManager.Instance.LogLevel_
+        };
+
+        DefaultBrowserProvider.Logger = logger;
+        BrowsersDiscovery.Logger = logger;
+
+        SettingsManager.Instance.Settings.SettingsChanged += (sender, eventArgs) =>
+        {
+            logger.LogLevel_ = SettingsManager.Instance.LogLevel_;
+        };
 
         var addShortcutPage = new AddShortcutPage(null)
         {
@@ -36,7 +52,8 @@ public partial class WebSearchShortcutCommandsProvider : CommandProvider
         _addShortcutItem = new CommandItem(addShortcutPage)
         {
             Title = Resources.AddShortcutItem_Title,
-            Icon = Icons.AddShortcut
+            Icon = Icons.AddShortcut,
+            MoreCommands = [new CommandContextItem(SettingsManager.Instance.Settings.SettingsPage) { Title = Resources.SettingsItem_Title}]
         };
     }
 

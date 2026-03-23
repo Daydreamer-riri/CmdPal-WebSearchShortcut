@@ -95,7 +95,7 @@ internal sealed partial class AddShortcutForm : FormContent
                     "title": {{JsonSerializer.Serialize(Resources.AddShortcutForm_BrowserPath_Default, AppJsonSerializerContext.Default.String)}},
                     "value": ""
                 },
-{{BrowsersDiscovery.GetAllInstalledBrowsers()
+{{BrowsersDiscovery.GetInstalledBrowsers()
     .Where(b => !string.IsNullOrWhiteSpace(b.Path))
     .Select(b => $$"""
                 {

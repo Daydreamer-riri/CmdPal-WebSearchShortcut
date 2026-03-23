@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebSearchShortcut.Browser;
 
@@ -10,7 +11,15 @@ namespace WebSearchShortcut.Tests.Helpers
         [TestMethod]
         public void FindUniqueHttpUrlAssociationProgIdsShouldPrintResults()
         {
-            var browserInfos = BrowsersDiscovery.GetAllInstalledBrowsers();
+            using var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder.AddDebug();
+                builder.SetMinimumLevel(LogLevel.Trace);
+            });
+
+            BrowsersDiscovery.Logger = loggerFactory.CreateLogger("Test");
+
+            var browserInfos = BrowsersDiscovery.GetInstalledBrowsers();
 
             foreach (var browserInfo in browserInfos)
             {

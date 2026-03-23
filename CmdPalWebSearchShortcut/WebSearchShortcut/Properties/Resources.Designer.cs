@@ -331,6 +331,15 @@ namespace WebSearchShortcut.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string SettingsItem_Title {
+            get {
+                return ResourceManager.GetString("SettingsItem_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to {shortcut}.
         /// </summary>
         internal static string ShortcutItem_NameTemplate {

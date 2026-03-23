@@ -219,4 +219,7 @@
   <data name="SearchQueryItem_NameTemplate" xml:space="preserve">
     <value>Search for "{query}"</value>
   </data>
+  <data name="SettingsItem_Title" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>
