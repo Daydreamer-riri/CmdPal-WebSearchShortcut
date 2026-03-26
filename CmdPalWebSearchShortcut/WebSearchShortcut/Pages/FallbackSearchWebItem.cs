@@ -24,6 +24,7 @@ internal sealed partial class FallbackSearchWebItem : FallbackCommandItem
 
         _searchWebCommand = (SearchWebCommand) Command!;
         _searchWebCommand.Name = string.Empty;
+        _searchWebCommand.Icon = Icons.Search;
 
         Title = string.Empty;
         Subtitle = string.Empty;
