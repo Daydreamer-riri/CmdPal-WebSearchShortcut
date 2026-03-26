@@ -38,7 +38,8 @@ internal sealed partial class SearchWebPage : DynamicListPage
 
         var openHomepagecommand = new OpenHomePageCommand(shortcut)
         {
-            Name = StringFormatter.Format(Resources.OpenHomepageItem_NameTemplate, new() { ["shortcut"] = shortcut.Name })
+            Name = StringFormatter.Format(Resources.OpenHomepageItem_NameTemplate, new() { ["shortcut"] = shortcut.Name }),
+            Icon = Icons.Home
         };
         _openHomepageListItem = new ListItem(openHomepagecommand)
         {
@@ -171,6 +172,7 @@ internal sealed partial class SearchWebPage : DynamicListPage
                 new SearchWebCommand(_shortcut, searchText)
                 {
                     Name = StringFormatter.Format(Resources.SearchQueryItem_NameTemplate, new() { ["shortcut"] = _shortcut.Name, ["query"] = searchText }),
+                    Icon = Icons.Search
                 }
             )
             {
@@ -195,7 +197,8 @@ internal sealed partial class SearchWebPage : DynamicListPage
             .. suggestions.Select(suggestion => new ListItem(
                 new SearchWebCommand(_shortcut, suggestion.Title)
                 {
-                    Name = StringFormatter.Format(Resources.SearchQueryItem_NameTemplate, new() { ["shortcut"] = _shortcut.Name, ["query"] =  suggestion.Title })
+                    Name = StringFormatter.Format(Resources.SearchQueryItem_NameTemplate, new() { ["shortcut"] = _shortcut.Name, ["query"] =  suggestion.Title }),
+                    Icon = Icons.Search
                 }
             )
             {
