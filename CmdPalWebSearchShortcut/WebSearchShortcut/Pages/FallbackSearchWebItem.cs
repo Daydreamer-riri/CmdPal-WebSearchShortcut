@@ -12,7 +12,13 @@ internal sealed partial class FallbackSearchWebItem : FallbackCommandItem
     private readonly WebSearchShortcutDataEntry _shortcut;
 
     public FallbackSearchWebItem(WebSearchShortcutDataEntry shortcut)
-        : base(new SearchWebCommand(shortcut, string.Empty) { Id = $"{shortcut.Id}.fallback" }, shortcut.Name, $"{shortcut.Id}.fallback")
+        : base(
+            id: $"{shortcut.Id}.fallback",
+            displayTitle: shortcut.Name,
+            command: new SearchWebCommand(shortcut, string.Empty) {
+                Id = $"{shortcut.Id}.fallback"
+            }
+        )
     {
         _shortcut = shortcut;
 
