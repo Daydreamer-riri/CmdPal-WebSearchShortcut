@@ -5,6 +5,12 @@ namespace WebSearchShortcut.Commands;
 
 internal sealed partial class SearchWebCommand : InvokableCommand
 {
+    public new string Id
+    {
+        get => base.Id;
+        set => base.Id = value;
+    }
+
     public string Query { get; internal set; } = string.Empty;
 
     private readonly WebSearchShortcutDataEntry _shortcut;
