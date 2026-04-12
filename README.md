@@ -56,14 +56,15 @@ The URL template for performing the search. Use `%s` as a placeholder for the se
 
 With `ReplaceWhitespace`, you can specify which character(s) to replace a space with when performing a search. This is useful for some websites, such as Wikipedia, which don't use plus signs ("+") to separate words in the URL.
 
-| Value         | Result             |
-|---------------|--------------------|
-| `" "` or `""` | `Example+search`   |
-| `"-"`         | `Example-search`   |
-| `"_"`         | `Example_search`   |
-| `"+"`         | `Example%2Bsearch` |
+| Value          | Result             |
+|----------------|--------------------|
+| `""` (Default) | `Example+search`   |
+| `"+"`          | `Example+search`   |
+| `"%20"`        | `Example%20search` |
+| `"-"`          | `Example-search`   |
+| `"_"`          | `Example_search`   |
 
-> **Note**: As the string is converted to a URL, any spaces in the string (or `ReplaceWhitespace`) will be replaced with plus signs. Any other characters that are not allowed in a URL will be encoded with [percent-encoding](https://en.wikipedia.org/wiki/Percent-encoding).
+> **Note**: The character defined in `ReplaceWhitespace` will be used **literally** as the separator without further encoding. While some modern browsers may automatically encode invalid characters, users are responsible for ensuring their chosen character is valid and compatible with the target URL template. For more information on valid URL characters, please refer to [percent-encoding](https://en.wikipedia.org/wiki/Percent-encoding).
 
 ### `SuggestionProvider`
 

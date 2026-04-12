@@ -30,15 +30,11 @@ internal sealed class WebSearchShortcutDataEntry
 
     static string UrlEncode(WebSearchShortcutDataEntry shortcut, string query)
     {
-        if (string.IsNullOrWhiteSpace(shortcut.ReplaceWhitespace) || shortcut.ReplaceWhitespace == " ")
-        {
-            return WebUtility.UrlEncode(query);
-        }
-        if (shortcut.ReplaceWhitespace == "%20")
-        {
-            return WebUtility.UrlEncode(query).Replace("+", "%20");
-        }
-        return WebUtility.UrlEncode(query.Replace(" ", shortcut.ReplaceWhitespace));
+        string encoded = WebUtility.UrlEncode(query);
+
+        return string.IsNullOrEmpty(shortcut.ReplaceWhitespace)
+            ? encoded
+            : encoded.Replace("+", shortcut.ReplaceWhitespace);
     }
 
     static public string GetSearchUrl(WebSearchShortcutDataEntry shortcut, string query)
