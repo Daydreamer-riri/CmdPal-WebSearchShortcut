@@ -14,40 +14,40 @@ internal static class Icons
     /// <summary>
     /// Extension logo icon
     /// </summary>
-    public static IconInfo Logo => IconHelpers.FromRelativePath("Assets\\Search.png");
+    public static IconInfo Logo { get; } = IconHelpers.FromRelativePath("Assets\\Search.png");
 
     /// <summary>
     /// "Add Shortcut" icon
     /// </summary>
-    public static IconInfo AddShortcut => IconHelpers.FromRelativePath("Assets\\SearchAdd.png");
+    public static IconInfo AddShortcut { get; } = IconHelpers.FromRelativePath("Assets\\SearchAdd.png");
 
     /// <summary>
     /// "Edit Shortcut" icon
     /// </summary>
-    public static IconInfo EditShortcut => new("\uE70F");
+    public static IconInfo EditShortcut { get; } = new("\uE70F");
 
     /// <summary>
     /// Default fallback icon for links
     /// </summary>
-    public static IconInfo Link => new("🔗");
+    public static IconInfo Link { get; } = new("🔗");
 
     /// <summary>
     /// Edit icon (pencil)
     /// </summary>
-    public static IconInfo Edit => new("\uE70F");
+    public static IconInfo Edit { get; } = new("\uE70F");
 
     /// <summary>
     /// Delete icon (trash can)
     /// </summary>
-    public static IconInfo Delete => new("\uE74D");
+    public static IconInfo Delete { get; } = new("\uE74D");
 
     /// <summary>
     /// Homepage icon
     /// </summary>
-    public static IconInfo Home => new("\uE80F");
+    public static IconInfo Home { get; } = new("\uE80F");
 
     /// <summary>
     /// Search icon
     /// </summary>
-    public static IconInfo Search => new("\uE721");
+    public static IconInfo Search { get; } = new("\uE721");
 }
