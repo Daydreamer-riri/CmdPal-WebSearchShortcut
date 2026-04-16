@@ -9,6 +9,7 @@ using WebSearchShortcut.Helpers;
 using WebSearchShortcut.Properties;
 using WebSearchShortcut.Services;
 using WebSearchShortcut.Shortcut;
+using WebSearchShortcut.Suggestion;
 
 namespace WebSearchShortcut;
 
@@ -188,7 +189,7 @@ internal sealed partial class SearchWebPage : DynamicListPage
     private async Task<ListItem[]> FetchSuggestionItemsAsync(string searchText, CancellationToken cancellationToken)
     {
         var suggestions = await SuggestionsRegistry
-            .Get(_shortcut.SuggestionProvider!)
+            .TryGet(_shortcut.SuggestionProvider)
             .GetSuggestionsAsync(searchText, cancellationToken)
             .ConfigureAwait(false);
 

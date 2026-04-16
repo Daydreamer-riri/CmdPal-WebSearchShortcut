@@ -6,6 +6,7 @@ using WebSearchShortcut.Browser;
 using WebSearchShortcut.Helpers;
 using WebSearchShortcut.Properties;
 using WebSearchShortcut.Shortcut;
+using WebSearchShortcut.Suggestion;
 
 namespace WebSearchShortcut;
 
@@ -74,10 +75,10 @@ internal sealed partial class AddShortcutForm : FormContent
                     "title": {{JsonSerializer.Serialize(Resources.AddShortcutForm_SuggestionProvider_None, AppJsonSerializerContext.Default.String)}},
                     "value": ""
                 },
-{{SuggestionsRegistry.ProviderNames.Select(key => $$"""
+{{SuggestionsRegistry.GetAll().Select(provider => $$"""
                 {
-                    "title": {{JsonSerializer.Serialize(key, AppJsonSerializerContext.Default.String)}},
-                    "value": {{JsonSerializer.Serialize(key, AppJsonSerializerContext.Default.String)}}
+                    "title": {{JsonSerializer.Serialize(provider.DisplayName, AppJsonSerializerContext.Default.String)}},
+                    "value": {{JsonSerializer.Serialize(provider.Id, AppJsonSerializerContext.Default.String)}}
                 }
 """)
     .Aggregate((a, b) => a + ",\n" + b)}}

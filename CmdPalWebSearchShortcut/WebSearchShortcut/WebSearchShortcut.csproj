@@ -22,8 +22,9 @@
     <GenerateAppxPackageOnBuild>true</GenerateAppxPackageOnBuild>
 
     <DefaultLanguage>en-US</DefaultLanguage>
-  </PropertyGroup>
 
+    <WindowsAppSDKAutoInitialize>false</WindowsAppSDKAutoInitialize>
+  </PropertyGroup>
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -52,6 +53,7 @@
     <PackageReference Include="Microsoft.Windows.CsWinRT" />
     <PackageReference Include="Microsoft.WindowsAppSDK" />
     <PackageReference Include="Microsoft.Web.WebView2" />
+    <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="System.Text.Json" />
     <PackageReference Include="Shmuelie.WinRTServer" />
   </ItemGroup>
@@ -84,4 +86,8 @@
     <CsWinRTAotWarningLevel>2</CsWinRTAotWarningLevel>
     <WarningsNotAsErrors>IL2081;IL2104;IL2026;IL3050</WarningsNotAsErrors>
   </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="WebSearchShortcut.Tests" />
+  </ItemGroup>
 </Project>
