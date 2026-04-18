@@ -2,9 +2,9 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Microsoft.CommandPalette.Extensions.Toolkit;
-using Windows.Foundation;
 using WebSearchShortcut.Browser;
 using WebSearchShortcut.Properties;
+using Windows.Foundation;
 
 namespace WebSearchShortcut;
 

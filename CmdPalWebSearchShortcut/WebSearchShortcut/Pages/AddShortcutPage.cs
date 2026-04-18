@@ -1,7 +1,7 @@
 using Microsoft.CommandPalette.Extensions;
 using Microsoft.CommandPalette.Extensions.Toolkit;
-using Windows.Foundation;
 using WebSearchShortcut.Properties;
+using Windows.Foundation;
 
 namespace WebSearchShortcut;
 

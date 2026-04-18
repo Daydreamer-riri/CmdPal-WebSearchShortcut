@@ -6,7 +6,6 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CommandPalette.Extensions.Toolkit;
-using WebSearchShortcut.Properties;
 
 namespace WebSearchShortcut.SuggestionsProviders;
 

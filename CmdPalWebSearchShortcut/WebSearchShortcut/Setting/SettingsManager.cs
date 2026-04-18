@@ -1,8 +1,6 @@
 using System.IO;
-using Windows.Foundation;
-using Microsoft.Extensions.Logging;
 using Microsoft.CommandPalette.Extensions.Toolkit;
-using WebSearchShortcut.Properties;
+using Microsoft.Extensions.Logging;
 
 namespace WebSearchShortcut.Setting;
 
