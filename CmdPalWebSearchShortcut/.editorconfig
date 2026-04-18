@@ -3,11 +3,11 @@ root = true
 [*]
 end_of_line = lf
 charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
 
 [*.cs]
 indent_style = space
 indent_size = 4
-trim_trailing_whitespace = true
-insert_final_newline = true
 
 csharp_new_line_before_open_brace = all

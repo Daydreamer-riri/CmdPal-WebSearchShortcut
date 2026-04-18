@@ -70,7 +70,7 @@ public class RegistryLogService(ILogger logger)
 
             throw;
         }
-         
+
         if (rawValue is null)
         {
             if (isRequired)

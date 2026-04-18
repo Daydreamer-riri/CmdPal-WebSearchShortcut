@@ -168,7 +168,7 @@ public class ProgIdBrowserService(ILogger logger)
 
         return (path, args);
     }
-    
+
     private static string GetIndirectString(string str)
     {
         var stringBuilder = new StringBuilder(128);
