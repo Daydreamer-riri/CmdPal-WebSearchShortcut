@@ -1,4 +1,4 @@
-﻿using Microsoft.CommandPalette.Extensions.Toolkit;
+using Microsoft.CommandPalette.Extensions.Toolkit;
 using WebSearchShortcut.Commands;
 using WebSearchShortcut.Helpers;
 using WebSearchShortcut.Properties;
