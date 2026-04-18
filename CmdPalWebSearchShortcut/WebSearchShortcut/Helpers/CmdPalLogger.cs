@@ -63,7 +63,7 @@ internal partial class CmdPalLogger(string extensionName) : ILogger
         _scopeStack.Value ??= [];
         _scopeStack.Value.Add(state.ToString()!);
 
-        return new DisposableAction(() =>  _scopeStack.Value.RemoveAt(_scopeStack.Value.Count - 1));
+        return new DisposableAction(() => _scopeStack.Value.RemoveAt(_scopeStack.Value.Count - 1));
     }
 
     private partial class DisposableAction(Action action) : IDisposable

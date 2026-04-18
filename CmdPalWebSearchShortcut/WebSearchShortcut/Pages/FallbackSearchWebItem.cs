@@ -15,7 +15,8 @@ internal sealed partial class FallbackSearchWebItem : FallbackCommandItem
         : base(
             id: $"{shortcut.Id}.fallback",
             displayTitle: shortcut.Name,
-            command: new SearchWebCommand(shortcut, string.Empty) {
+            command: new SearchWebCommand(shortcut, string.Empty)
+            {
                 Id = $"{shortcut.Id}.fallback",
                 Name = string.Empty,
                 Icon = Icons.Search
@@ -24,7 +25,7 @@ internal sealed partial class FallbackSearchWebItem : FallbackCommandItem
     {
         _shortcut = shortcut;
 
-        _searchWebCommand = (SearchWebCommand) Command!;
+        _searchWebCommand = (SearchWebCommand)Command!;
 
         Title = string.Empty;
         Subtitle = string.Empty;

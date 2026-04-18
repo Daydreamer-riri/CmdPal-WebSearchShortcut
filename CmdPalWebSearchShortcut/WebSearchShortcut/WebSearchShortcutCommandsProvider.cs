@@ -53,7 +53,7 @@ public partial class WebSearchShortcutCommandsProvider : CommandProvider
         {
             Title = Resources.AddShortcutItem_Title,
             Icon = Icons.AddShortcut,
-            MoreCommands = [new CommandContextItem(SettingsManager.Instance.Settings.SettingsPage) { Title = Resources.SettingsItem_Title}]
+            MoreCommands = [new CommandContextItem(SettingsManager.Instance.Settings.SettingsPage) { Title = Resources.SettingsItem_Title }]
         };
     }
 

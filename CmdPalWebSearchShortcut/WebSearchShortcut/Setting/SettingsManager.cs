@@ -32,7 +32,8 @@ internal sealed class SettingsManager : JsonSettingsManager
             new ChoiceSetSetting.Choice("Error",       "Error"),
             new ChoiceSetSetting.Choice("None",        "None"),
         ]
-    ) {
+    )
+    {
         Label = "Log Level",
         Description = "Log Level",
         Value = _defaultLogLevel
@@ -49,7 +50,7 @@ internal sealed class SettingsManager : JsonSettingsManager
                 "Information" => LogLevel.Information,
                 "Warning"     => LogLevel.Warning,
                 "Error"       => LogLevel.Error,
-                "None"       => LogLevel.None,
+                "None"        => LogLevel.None,
                 _             => LogLevel.Information
             };
         }
