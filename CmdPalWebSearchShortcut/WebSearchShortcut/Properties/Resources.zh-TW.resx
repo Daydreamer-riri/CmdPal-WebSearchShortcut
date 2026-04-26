@@ -132,6 +132,9 @@
   <data name="AddShortcutPage_Title_Edit" xml:space="preserve">
     <value>編輯搜尋捷徑</value>
   </data>
+  <data name="AddShortcutForm_ReadOnlyModeWarning" xml:space="preserve">
+    <value>目前為唯讀模式：你所做的變更不會被儲存（可能是因為讀寫 {filePath} 失敗）。重新載入或重啟後，會復原改動。</value>
+  </data>
   <data name="AddShortcutForm_Name_Label" xml:space="preserve">
     <value>名稱</value>
   </data>
@@ -200,6 +203,18 @@
   </data>
   <data name="DeleteShortcutItem_TitleTemplate" xml:space="preserve">
     <value>刪除搜尋捷徑</value>
+  </data>
+  <data name="DeleteShortcutConfirm_TitleTemplate" xml:space="preserve">
+    <value>刪除搜尋捷徑</value>
+  </data>
+  <data name="DeleteShortcutConfirm_DescriptionTemplate" xml:space="preserve">
+    <value>你確定要永久刪除 {shortcut} 嗎？</value>
+  </data>
+  <data name="DeleteShortcutConfirm_DescriptionTemplate_ReadOnlyMode" xml:space="preserve">
+    <value>目前為唯讀模式：此變更不會被儲存（可能是因為讀寫 {filePath} 失敗）。重新載入或重啟後，會復原改動。</value>
+  </data>
+  <data name="DeleteShortcutConfirm_ButtonTemplate" xml:space="preserve">
+    <value>刪除</value>
   </data>
   <data name="SearchWebPage_TitleTemplate" xml:space="preserve">
     <value>{shortcut}</value>

@@ -132,6 +132,9 @@
   <data name="AddShortcutPage_Title_Edit" xml:space="preserve">
     <value>编辑搜索捷径</value>
   </data>
+  <data name="AddShortcutForm_ReadOnlyModeWarning" xml:space="preserve">
+    <value />
+  </data>
   <data name="AddShortcutForm_Name_Label" xml:space="preserve">
     <value>名称</value>
   </data>
@@ -199,6 +202,18 @@
     <value>编辑搜索捷径</value>
   </data>
   <data name="DeleteShortcutItem_TitleTemplate" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="DeleteShortcutConfirm_TitleTemplate" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DeleteShortcutConfirm_DescriptionTemplate" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DeleteShortcutConfirm_DescriptionTemplate_ReadOnlyMode" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DeleteShortcutConfirm_ButtonTemplate" xml:space="preserve">
     <value>删除</value>
   </data>
   <data name="SearchWebPage_TitleTemplate" xml:space="preserve">
