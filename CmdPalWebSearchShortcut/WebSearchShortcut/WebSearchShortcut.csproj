@@ -31,7 +31,7 @@
 
   <PropertyGroup>
     <IsAotCompatible>true</IsAotCompatible>
-    <CsWinRTAotOptimizerEnabled>true</CsWinRTAotOptimizerEnabled>
+    <CsWinRTAotOptimizerEnabled>false</CsWinRTAotOptimizerEnabled>
     <CsWinRTAotWarningLevel>2</CsWinRTAotWarningLevel>
     <WarningsNotAsErrors>IL2081;IL2104;IL2026;IL3050</WarningsNotAsErrors>
   </PropertyGroup>
