@@ -36,22 +36,11 @@ jobs:
     - name: Setup msbuild.exe
       uses: microsoft/setup-msbuild@v2
 
-    - name: Set version
-      run: |
-        [Reflection.Assembly]::LoadWithPartialName("System.Xml.Linq")
-        $xIdentity = [System.Xml.Linq.XName]::Get("{http://schemas.microsoft.com/appx/manifest/foundation/windows10}Identity");
-        $appxmanifests = Get-ChildItem -Path CmdPalWebSearchShortcut -Filter *.appxmanifest -Recurse
-        foreach ($appxmanifestPath in $appxmanifests) {
-          $appxmanifest = [System.Xml.Linq.XDocument]::Load($appxmanifestPath)
-          $appxmanifest.Root.Element($xIdentity).Attribute("Version").Value = "${{env.VERSION}}.0"
-          $appxmanifest.Save($appxmanifestPath)
-        }
-
     - name: Restore packages
       run: msbuild CmdPalWebSearchShortcut\WebSearchShortcut.sln /t:Restore /p:Configuration=Release
 
     - name: Build Plugin
-      run: msbuild CmdPalWebSearchShortcut\WebSearchShortcut\WebSearchShortcut.csproj /p:Configuration=Release /p:Platform=${{matrix.platform}} /p:Version=${{env.VERSION}}
+      run: msbuild CmdPalWebSearchShortcut\WebSearchShortcut\WebSearchShortcut.csproj /p:Configuration=Release /p:Platform=${{matrix.platform}}
 
     - name: Prepare artifact
       run: |
