@@ -87,4 +87,38 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <!-- Stamp package version into an intermediate copy of AppxManifest for MSIX packaging -->
+  <Target Name="StampAppxManifestVersion"
+          BeforeTargets="_ValidatePresenceOfAppxManifestItems;_CalculateInputsForGenerateCurrentProjectAppxManifest;_GenerateCurrentProjectAppxManifest;BeforeGenerateAppxManifest"
+          Condition="'$(AppxPackageVersion)' != ''">
+    <PropertyGroup>
+      <_AppxNs>&lt;Namespace Prefix='m' Uri='http://schemas.microsoft.com/appx/manifest/foundation/windows10' /&gt;</_AppxNs>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <!-- Ensure @(AppxManifest) contains Package.appxmanifest if not explicitly defined yet -->
+      <AppxManifest Condition="'@(AppxManifest)' == '' and Exists('Package.appxmanifest')" Include="Package.appxmanifest" />
+    </ItemGroup>
+
+    <!-- Copy manifest to intermediate directory so the source file in Git is never modified -->
+    <Copy SourceFiles="@(AppxManifest)"
+          DestinationFolder="$(IntermediateOutputPath)StampedManifest\"
+          SkipUnchangedFiles="false">
+      <Output TaskParameter="DestinationFiles" ItemName="_StampedAppxManifest" />
+    </Copy>
+
+    <!-- Stamp AppxPackageVersion onto the intermediate manifest -->
+    <XmlPoke
+      XmlInputPath="%(_StampedAppxManifest.FullPath)"
+      Namespaces="$(_AppxNs)"
+      Query="/m:Package/m:Identity/@Version"
+      Value="$(AppxPackageVersion)" />
+
+    <!-- Direct the packaging pipeline to use the stamped manifest in obj/ -->
+    <ItemGroup>
+      <AppxManifest Remove="@(AppxManifest)" />
+      <AppxManifest Include="@(_StampedAppxManifest)" />
+    </ItemGroup>
+  </Target>
+
 </Project>

@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <Version>0.1.3</Version>
+    <AppxPackageRevision Condition="'$(AppxPackageRevision)' == '' and ('$(CI)' == 'true' or '$(GITHUB_ACTIONS)' == 'true')">0</AppxPackageRevision>
+    <AppxPackageRevision Condition="'$(AppxPackageRevision)' == ''">1</AppxPackageRevision>
+    <AppxPackageVersion Condition="'$(AppxPackageVersion)' == ''">$(Version).$(AppxPackageRevision)</AppxPackageVersion>
     <Platforms>x64;ARM64</Platforms>
     <PlatformTarget>$(Platform)</PlatformTarget>
   </PropertyGroup>
